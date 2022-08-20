@@ -6,11 +6,11 @@ vue3源码学习
 #### Software Architecture
 Software architecture description
 
-#### Installation
+#### Branch
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  mini-vue 崔大课程
+2.  vue-design vueJs设计与实现
+3.  vue-notes 崔大课程笔记
 
 #### Instructions
 
