@@ -1,7 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="" />
+    <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/响应式模块/01.reactivity.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/02.effect_complete.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/03.readonly.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/04.isReactive&amp;isReadonly.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/05.优化stop.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/06.reactive嵌套.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/07.isProxy.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/08.ref.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/09.isRef&amp;unRef&amp;proxyRef.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/10.computed.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/11.总结Reactivity.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/12.initComponent.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/响应式模块/关于stop时清除依赖的操作.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/运行时模块/01初始化component主流程.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/运行时模块/02.初始化element主流程.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.框架设计.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/01.mountComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/02.componentStateAndUpdate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/03.componentInstanceAndAlive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/04.processProps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/05.componentPassiveUpdate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/06.setup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/07.eventAndEmit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/08.slots.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12.组件的实现原理/09.componentAlive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/01.purpose.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/02.defineAsyncComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/03.timeoutAndError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/04.delayAndLoading.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/05.retry.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/13.异步组件与函数式组件/06.functional.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/1.keepAlive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/2.keepAliveUnmount.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/3.includeAndExclude.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/4.keepAliveCache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/4.keepAliveCache.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/5.Teleport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/6.TransitionExample.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.内建组件和模块/7.Transition.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/1.tokenize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/2.parser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/3.transformAST.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/4.transforms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/5.transformContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/6.traverseProcess.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/7.templateToJavaScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/8.nodeFactory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/9.generateCode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.编译器核心技术/conformity.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15编译器.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/01.textMode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/02.buildTemplateAST.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/03.machineStartStop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/04.parseElement.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/05.parseProps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/06-1.parseTextAndHTML.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/06-2.parseTextAndHTML.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/16.解析器/07.parseInterAndComment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/17.编译优化.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/17.编译优化/1-1.patchMark.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/17.编译优化/1-2.dynamicCollect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/17.编译优化/1-3.updateSustain.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染/1.vNodeToString.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染/2.renderAttrs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染/3.compentToString.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染/4clientActive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/18.同构渲染/5.homogeneousRender.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.设计核心要素.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.10.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.11.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.12.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.13.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.14.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.15.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.16.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/4.9.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.响应式系统的作用与实现/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/1.for-in-base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/10.reactive-array-find.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/11.reactive-array-.hidden.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/2.for-in-add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/3.for-in-set.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/4.getter-correct.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/5.trigger-proto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/6.shallowTrigger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/7.reactive-array.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/8.reactive-array-length.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5.非原始值的响应式方案/9.reactive-array-for.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.原始值的响应式方案/1.ref-base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.原始值的响应式方案/2.ref-toRef-base.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.原始值的响应式方案/3.ref-toRefs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/6.原始值的响应式方案/4.ref-proxyRef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/7.渲染器的设计.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/1.childNode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/10.textAndCommentNode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/2.HTML-Attr&amp;DOM-Prop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/3.renderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/4.processClass.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/5.unmount.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/6.vNode-type.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/7.processEvent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/8.eventBubbling.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8.挂载与更新/9.updateChildren.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/INDEX.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/renderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue3.xmind" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,7 +147,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2DbVjlU9lrf7yWTNAu5hXtEdZIt" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="添加" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,8 +159,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\myGit\mini-vue-hc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\myGit\mini-vue-hc" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -34,11 +181,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660967908679</updated>
-      <workItem from="1660967913577" duration="422000" />
+      <workItem from="1660967913577" duration="697000" />
+      <workItem from="1660968628868" duration="89000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
