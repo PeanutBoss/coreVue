@@ -1,17 +1,20 @@
 import { PublicInstanceProxyHandlers } from "./componentPublicInstance"
+import { initProps } from "./componentProps";
+import { shallowReadonly } from '../reactivity/reactive'
 
 export function createComponentInstance (vNode) {
   const component = {
     vNode,
     type: vNode.type,
-    setupState: {}
+    setupState: {},
+    props: {}
   }
   return component
 }
 
 export function setupComponent (instance) {
   // TODO
-  // initProps
+  initProps(instance, instance.vNode.props)
   // initSlots
 
   setupStatefulComponent(instance)
@@ -27,7 +30,8 @@ function setupStatefulComponent(instance) {
   const { setup } = Component
 
   if (setup) {
-    const setupResult = setup()
+    // 因为传入的props是浅只读的，所以使用 shallowReadonly 包裹
+    const setupResult = setup(shallowReadonly(instance.props))
 
     handleSetupResult(instance, setupResult)
   }

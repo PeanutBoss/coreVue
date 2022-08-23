@@ -4,14 +4,18 @@ const publicPropertiesMap = {
 
 export const PublicInstanceProxyHandlers = {
     get({_: instance}, key) {
-        const { setupState } = instance
-        // 如果setupState中存在这个属性就返回它的值
-        if (key in setupState) {
-            return setupState[key]
-        }
-        const publicGetter = publicPropertiesMap[key]
-        if (publicGetter) {
-            return publicGetter(instance)
-        }
+      const { setupState, props } = instance
+
+      const hasOwn = (val, key) => Object.prototype.hasOwnProperty.call(val, key)
+
+      if (hasOwn(setupState, key)) {
+        return setupState[key]
+      } else if (hasOwn(props, key)) {
+        return props[key]
+      }
+      const publicGetter = publicPropertiesMap[key]
+      if (publicGetter) {
+        return publicGetter(instance)
+      }
     }
 }

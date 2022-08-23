@@ -19,16 +19,23 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:mini-vue" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05df3b47-9e9a-47ed-95d3-094f7ce7fa43" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/example/helloWorld/Foo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/runtime-core/componentProps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.en.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.en.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/helloWorld/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/helloWorld/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue-esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guide-mini-vue-esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guide-mini-vue.cjs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reactivity/reactive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reactivity/reactive.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/componentPublicInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/componentPublicInstance.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +65,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="E:\myGit\mini-vue-hc\node_modules\typescript\lib" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -69,7 +77,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660968996183</updated>
-      <workItem from="1660968999993" duration="111000" />
+      <workItem from="1660968999993" duration="350000" />
+      <workItem from="1661258240611" duration="1169000" />
+      <workItem from="1661259632904" duration="1274000" />
     </task>
     <servers />
   </component>
@@ -87,7 +97,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="mini-vue" />
                       </list>
                     </value>
                   </entry>
@@ -109,5 +119,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="698" y="271" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1660968973414" />
+    <state x="600" y="296" width="672" height="678" key="search.everywhere.popup" timestamp="1661260601797">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="600" y="296" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1661260601797" />
   </component>
 </project>

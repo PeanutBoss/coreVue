@@ -1,15 +1,20 @@
 import { mutableHandles, readonlyHandles, shallowReadonlyHandlers } from './baseHandle'
+import {isObject} from "../share/index";
 
 export function reactive (raw) {
-  return createActiveObject(raw, mutableHandles)
+  return createReactiveObject(raw, mutableHandles)
 }
 
 // 只读，意味着不能set
 export function readonly (raw) {
-  return createActiveObject(raw, readonlyHandles)
+  return createReactiveObject(raw, readonlyHandles)
 }
 
-function createActiveObject (raw: any, baseHandlers) {
+function createReactiveObject (raw: any, baseHandlers) {
+  if (!isObject(raw)) {
+    console.warn(`raw ${raw}必须是一个对象`)
+    return raw
+  }
   return new Proxy(raw, baseHandlers)
 }
 
@@ -29,7 +34,7 @@ export function isReadOnly (value) {
 }
 
 export function shallowReadonly (raw) {
-  return createActiveObject(raw, shallowReadonlyHandlers)
+  return createReactiveObject(raw, shallowReadonlyHandlers)
 }
 
 export function isProxy(raw) {
