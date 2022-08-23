@@ -1,3 +1,4 @@
+import { ShapeFlags } from "../share/ShapeFlags";
 import {createComponentInstance, setupComponent} from "./component";
 
 export function render (vNode, container) {
@@ -5,10 +6,11 @@ export function render (vNode, container) {
 }
 
 function patch (vNode, container) {
-  // TODO 判断vNode是不是element
-  if (typeof vNode.type === 'string') {
+  // ShapeFlags - &
+  const { shapeFlag } = vNode
+  if (shapeFlag & ShapeFlags.ELEMENT) {
     processElement(vNode, container)
-  } else {
+  } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     // 去处理组件
     processComponent(vNode, container)
   }
@@ -32,13 +34,14 @@ function processElement (vNode, container) {
 }
 
 function mountElement(vNode, container) {
-  // $el：这里的虚拟节点时element类型的，也就是App中的根元素div；return instance.vNode.el中的虚拟节点是组件实例对象的虚拟节点
+  // $el：这里的虚拟节点是element类型的，也就是App中的根元素div；return instance.vNode.el中的虚拟节点是组件实例对象的虚拟节点
   // 创建对应的DOM，同时绑定到虚拟DOM上
   const el = vNode.el = document.createElement(vNode.type)
+  const { children, shapeFlag } = vNode
   // 处理子节点 - 如果是string类型直接赋值给DOM元素的textContent属性
-  if (typeof vNode.children === 'string') {
-    el.textContent = vNode.children
-  } else if (Array.isArray(vNode.children)) {
+  if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+    el.textContent = children
+  } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
     // 如果是数组类型（说明有多个子元素），调用patch递归处理子节点
     mountChildren(vNode, el)
   }
