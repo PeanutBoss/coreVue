@@ -1,11 +1,31 @@
-import { h } from '../../lib/guide-mini-vue-esm'
+import { h } from '../../lib/guide-mini-vue-esm.js'
 
-export default {
-  setup(props) {
-    console.log(props)
-    // props 不可以被修改
-  },
-  render() {
-    return h('div', {}, 'foo：' + this.count)
-  }
+export const Foo = {
+    setup(props, { emit }) {
+        props.count++ // 不能修改,因为props是只读的
+            console.log(props)
+
+        const emitAdd = () => {
+            console.log('emit add');
+            emit('add', 2, 5)
+        }
+        const emitAddFoo = () => {
+            emit('add-foo')
+        }
+        return {
+            emitAdd,
+            emitAddFoo
+        }
+    },
+    render() {
+        const btn = h(
+            'button', {
+                // onClick: this.emitAddFoo
+                onClick: this.emitAdd
+            },
+            'emitAdd'
+        )
+        const foo = h('div', {}, 'foo：' + this.count)
+        return h('div', {}, [foo, btn])
+    }
 }
