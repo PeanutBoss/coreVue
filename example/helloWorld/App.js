@@ -1,12 +1,6 @@
 import { h } from '../../lib/guide-mini-vue-esm.js'
 import { Foo } from './Foo.js'
 
-// const templateSetupResult = h('div', {}, 'hello,' + this.msg)
-// const templateArrayChildren = h('div', { class: 'root' }, [
-//     h('p', { class: 'red' }, this.msg),
-//     h('p', { class: 'green' }, 'mini-vue')
-// ])
-
 export const App = {
     render() {
         // return h('div',{}, 'hello,' + this.msg)
@@ -20,8 +14,6 @@ export const App = {
                     console.log('mousedown')
                 }
             }, [
-                // h('p', { class: 'red' }, this.msg),
-                // h('p', { class: 'green' }, 'mini-vue')
                 h('div', {}, 'hi, ' + this.msg),
                 h(
                     Foo, {
