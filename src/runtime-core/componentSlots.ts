@@ -10,6 +10,7 @@ export function initSlots (instance, children) {
 function normalizeObjectSlot(children, slots) {
     for (const key in children) {
         const value = children[key]
+        // 将 slots 设置为对象，从里面根据插槽名取出对应插槽
         // normalizeSlotValue 接受的是结果，但此时value是函数，且需要传入props
         slots[key] = props => normalizeSlotValue(value(props))
     }

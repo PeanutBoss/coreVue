@@ -1,7 +1,7 @@
 // 抽离get
 import {track, trigger} from "./effect";
 import {reactive, ReactiveFlags, readonly} from './reactive'
-import { isObject, extend } from '../share'
+import { isObject, extend } from '../share/index'
 
 const get = createGetter()
 const set = createSetter()
