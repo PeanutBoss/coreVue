@@ -6,9 +6,12 @@ export const Foo = {
     },
     render() {
         const foo = h('p', {}, 'foo')
-        console.log(renderSlots(this.$slots))
         // 获取渲染的元素
         // 获取元素需要渲染的位置
-        return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+        return h('div', {}, [
+            renderSlots(this.$slots, 'header', { name: '路飞' }),
+            foo,
+            renderSlots(this.$slots, 'footer', { name: '乔巴' })
+        ])
     }
 }

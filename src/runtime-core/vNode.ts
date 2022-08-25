@@ -1,4 +1,5 @@
-import { ShapeFlags } from '../share/ShapeFlags'
+import {ShapeFlags} from '../share/ShapeFlags'
+
 export function createVNode (type, props?, children?) {
   const vNode = {
     type,
@@ -11,6 +12,12 @@ export function createVNode (type, props?, children?) {
     vNode.shapeFlag |= ShapeFlags.TEXT_CHILDREN
   } else if (Array.isArray(children)) {
     vNode.shapeFlag |= ShapeFlags.ARRAY_CHILDREN
+  }
+  // slot - 组件&object
+  if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+    if (typeof children === 'object') {
+      vNode.shapeFlag |= ShapeFlags.SLOT_CHILDREN
+    }
   }
   return vNode
 }
