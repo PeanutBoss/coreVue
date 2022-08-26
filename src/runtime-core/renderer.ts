@@ -1,6 +1,6 @@
 import { ShapeFlags } from "../share/ShapeFlags";
 import { createComponentInstance, setupComponent } from "./component";
-import { Fragment } from "./vNode";
+import { Fragment, Text } from "./vNode";
 
 export function render (vNode, container) {
   patch(vNode, container)
@@ -13,6 +13,9 @@ function patch (vNode, container) {
   switch (type) {
     case Fragment:
       processFragment(vNode, container)
+      break
+    case Text:
+      processText(vNode, container)
       break
     default:
       if (shapeFlag & ShapeFlags.ELEMENT) {
@@ -78,6 +81,13 @@ function mountChildren (vNode, container) {
 
 function processFragment (vNode, container) {
   mountChildren(vNode, container)
+}
+
+function processText (vNode, container) {
+  console.log(vNode, container)
+  const { children } = vNode
+  const textNode = vNode.el = document.createTextNode(children)
+  container.append(textNode)
 }
 
 // 第一次渲染App组件的时候会执行，并且将render函数的this绑定为创建的代理对象
