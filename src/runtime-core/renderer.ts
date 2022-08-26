@@ -1,5 +1,6 @@
 import { ShapeFlags } from "../share/ShapeFlags";
-import {createComponentInstance, setupComponent} from "./component";
+import { createComponentInstance, setupComponent } from "./component";
+import { Fragment } from "./vNode";
 
 export function render (vNode, container) {
   patch(vNode, container)
@@ -7,12 +8,20 @@ export function render (vNode, container) {
 
 function patch (vNode, container) {
   // ShapeFlags - &
-  const { shapeFlag } = vNode
-  if (shapeFlag & ShapeFlags.ELEMENT) {
-    processElement(vNode, container)
-  } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
-    // 去处理组件
-    processComponent(vNode, container)
+  const { shapeFlag, type } = vNode
+
+  switch (type) {
+    case Fragment:
+      processFragment(vNode, container)
+      break
+    default:
+      if (shapeFlag & ShapeFlags.ELEMENT) {
+        processElement(vNode, container)
+      } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+        // 去处理组件
+        processComponent(vNode, container)
+      }
+      break
   }
 }
 
@@ -65,6 +74,10 @@ function mountChildren (vNode, container) {
   vNode.children.forEach(child => {
     patch(child, container)
   })
+}
+
+function processFragment (vNode, container) {
+  mountChildren(vNode, container)
 }
 
 // 第一次渲染App组件的时候会执行，并且将render函数的this绑定为创建的代理对象

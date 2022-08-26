@@ -27,9 +27,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fc8aad57-bc64-4174-9480-d7f04bba7402" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reactivity/baseHandle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reactivity/baseHandle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runtime-core/componentSlots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/componentSlots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue-esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guide-mini-vue-esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/guide-mini-vue.cjs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runtime-core/helpers/renderSlots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/helpers/renderSlots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/renderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/renderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/vNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/vNode.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +75,8 @@
       <option name="presentableId" value="Default" />
       <updated>1661262296653</updated>
       <workItem from="1661262302265" duration="159000" />
-      <workItem from="1661411824746" duration="10418000" />
+      <workItem from="1661411824746" duration="10670000" />
+      <workItem from="1661477638301" duration="981000" />
     </task>
     <servers />
   </component>
