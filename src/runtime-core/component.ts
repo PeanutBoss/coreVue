@@ -35,11 +35,14 @@ function setupStatefulComponent(instance) {
   const { setup } = Component
 
   if (setup) {
+    // currentInstance = instance
+    setCurrentInstance(instance)
     // 因为传入的props是浅只读的，所以使用 shallowReadonly 包裹
     const setupResult = setup(shallowReadonly(instance.props), {
       emit: instance.emit,
     })
-
+    // currentInstance = null
+    setCurrentInstance(null)
     handleSetupResult(instance, setupResult)
   }
 }
@@ -57,5 +60,14 @@ function finishComponentSetup (instance) {
   if (Component.render) {
     instance.render = Component.render
   }
+}
 
+let currentInstance = null
+
+export function getCurrentInstance () {
+  return currentInstance
+}
+
+export function setCurrentInstance (instance) {
+  currentInstance = instance
 }

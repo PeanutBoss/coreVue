@@ -1,38 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:mini-vue" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc8aad57-bc64-4174-9480-d7f04bba7402" name="默认更改列表" comment="">
+    <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Checkout__at_2022_8_20_12_16___.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Checkout__at_2022_8_20_12_16___.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/helloWorld/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/helloWorld/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue-esm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/guide-mini-vue.cjs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/helloWorld/Foo.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/helloWorld/Foo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runtime-core/helpers/renderSlots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/helpers/renderSlots.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runtime-core/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runtime-core/renderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/renderer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runtime-core/vNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runtime-core/vNode.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +19,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="2Dl8QiyOdV9UByniArnCYF0lG7E" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2DbVjlU9lrf7yWTNAu5hXtEdZIt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,67 +30,37 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="ts.external.directory.path" value="D:\relax\mini-vue-hc\node_modules\typescript\lib" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\relax\mini-vue-hc\defaultSlots" />
-    </key>
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="E:\myGit\mini-vue-hc\node_modules\typescript\lib" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fc8aad57-bc64-4174-9480-d7f04bba7402" name="默认更改列表" comment="" />
-      <created>1661262296653</created>
+      <changelist id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="" />
+      <created>1660967908679</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1661262296653</updated>
-      <workItem from="1661262302265" duration="159000" />
-      <workItem from="1661411824746" duration="10670000" />
-      <workItem from="1661477638301" duration="5249000" />
+      <updated>1660967908679</updated>
+      <workItem from="1660967913577" duration="422000" />
+      <workItem from="1661263009927" duration="14000" />
+      <workItem from="1661556798751" duration="149000" />
+      <workItem from="1661557054270" duration="1152000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="true" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="mini-vue" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="WindowStateProjectService">
+    <state x="880" y="284" key="RollbackChangesDialog" timestamp="1661558178554">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="880" y="284" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1661558178554" />
   </component>
 </project>
