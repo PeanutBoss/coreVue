@@ -1,4 +1,4 @@
-import { createVNode, Fragment } from "../vNode";
+import { createVNode, Fragment } from '../vNode'
 
 export function renderSlots (slots, name, props) {
     // 根据插槽名从slots对象中取出对应插槽
