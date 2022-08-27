@@ -2,8 +2,8 @@ import { ShapeFlags } from "../share/ShapeFlags";
 import { createComponentInstance, setupComponent } from "./component";
 import { Fragment, Text } from "./vNode";
 
-export function render (vNode, container, parentComponent) {
-  patch(vNode, container, parentComponent)
+export function render (vNode, container) {
+  patch(vNode, container, null)
 }
 
 function patch (vNode, container, parentComponent) {
@@ -103,3 +103,5 @@ function setupRenderEffect (instance, vNode, container, parentComponent) {
   // 子元素处理完成之后
   vNode.el = subTree.el
 }
+
+
