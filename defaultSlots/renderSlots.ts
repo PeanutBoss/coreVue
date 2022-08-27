@@ -1,4 +1,4 @@
-import { createVNode } from "../vNode";
+import { createVNode } from '../src/runtime-core/vNode'
 
 export function renderSlots (slots, name) {
     const slot = slots[name] || slots
