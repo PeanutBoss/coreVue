@@ -12,7 +12,7 @@ export function createComponentInstance (vNode, parent) {
     setupState: {},
     props: {},
     slots: {},
-    providers: {},
+    providers: parent ? parent.providers : {},
     parent,
     emit: () => {}
   }

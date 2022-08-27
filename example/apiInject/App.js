@@ -4,10 +4,24 @@ const Provider = {
     name: 'Provider',
     setup () {
         provider('foo', 'FooVal'),
-        provider('bar', 'BarVal')
+            provider('bar', 'BarVal')
     },
     render () {
-        return h('div', {}, [h('p', {}, 'provider'), h(Consumer)])
+        return h('div', {}, [h('p', {}, 'provider'), h(ProviderTwo)])
+    }
+}
+
+const ProviderTwo= {
+    name: 'Provider',
+    setup () {
+        provider('foo', 'FooTwoVal')
+        const foo = inject('foo')
+        return {
+            foo
+        }
+    },
+    render () {
+        return h('div', {}, [h('p', {}, `providerTwo foo: ${this.foo}`), h(Consumer)])
     }
 }
 
