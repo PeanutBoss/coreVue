@@ -4,13 +4,16 @@ import { initSlots } from "./componentSlots";
 import { shallowReadonly } from '../reactivity/reactive'
 import { emit } from './componentEmit'
 
-export function createComponentInstance (vNode) {
+export function createComponentInstance (vNode, parent) {
+  console.log(parent, 'parent')
   const component: any = {
     vNode,
     type: vNode.type,
     setupState: {},
     props: {},
     slots: {},
+    providers: {},
+    parent,
     emit: () => {}
   }
   component.emit = emit.bind(null, component)
