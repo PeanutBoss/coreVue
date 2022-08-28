@@ -2,6 +2,7 @@ import { ShapeFlags } from "../share/ShapeFlags";
 import { createComponentInstance, setupComponent } from "./component";
 import { Fragment, Text } from "./vNode";
 import { createAppAPI } from './createApp'
+import {effect} from "../reactivity/effect";
 
 export function createRender (options) {
 
@@ -12,32 +13,35 @@ export function createRender (options) {
   } = options
 
   function render (vNode, container) {
-    patch(vNode, container, null)
+    patch(null, vNode, container, null)
   }
 
-  function patch (vNode, container, parentComponent) {
+  /*
+  * oldVNode - 不存在说明初始化，存在说明更新
+  * */
+  function patch (oldVNode, vNode, container, parentComponent) {
     // ShapeFlags - &
     const { shapeFlag, type } = vNode
 
     switch (type) {
       case Fragment:
-        processFragment(vNode, container, parentComponent)
+        processFragment(oldVNode, vNode, container, parentComponent)
         break
       case Text:
-        processText(vNode, container)
+        processText(oldVNode, vNode, container)
         break
       default:
         if (shapeFlag & ShapeFlags.ELEMENT) {
-          processElement(vNode, container, parentComponent)
+          processElement(oldVNode, vNode, container, parentComponent)
         } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
           // 去处理组件
-          processComponent(vNode, container, parentComponent)
+          processComponent(oldVNode, vNode, container, parentComponent)
         }
         break
     }
   }
 
-  function processComponent (vNode, container, parentComponent) {
+  function processComponent (oldVNode, vNode, container, parentComponent) {
     mountComponent(vNode, container, parentComponent)
   }
 
@@ -47,11 +51,15 @@ export function createRender (options) {
 
     // 处理setup中的信息（例如：实现代理this）
     setupComponent(instance)
-    setupRenderEffect(instance, vNode, container, parentComponent)
+    setupRenderEffect(instance, vNode, container)
   }
 
-  function processElement (vNode, container, parentComponent) {
-    mountElement(vNode, container, parentComponent)
+  function processElement (oldVNode, vNode, container, parentComponent) {
+    if (!oldVNode) {
+      mountElement(vNode, container, parentComponent)
+    } else {
+      patchElement(oldVNode, vNode, container)
+    }
   }
 
   function mountElement(vNode, container, parentComponent) {
@@ -75,18 +83,29 @@ export function createRender (options) {
     hostInsert(el ,container)
   }
 
+  function patchElement(oldVNode, vNode, container) {
+    console.log('patchElement')
+    console.log('oldVNode', oldVNode)
+    console.log('vNode', vNode)
+
+    /*
+    * props
+    * children
+    * */
+  }
+
   // 当children为数组时，处理子节点
   function mountChildren (vNode, container, parentComponent) {
     vNode.children.forEach(child => {
-      patch(child, container, parentComponent)
+      patch(null, child, container, parentComponent)
     })
   }
 
-  function processFragment (vNode, container, parentComponent) {
+  function processFragment (oldVNode, vNode, container, parentComponent) {
     mountChildren(vNode, container, parentComponent)
   }
 
-  function processText (vNode, container) {
+  function processText (oldVNode, vNode, container) {
     console.log(vNode, container)
     const { children } = vNode
     const textNode = vNode.el = document.createTextNode(children)
@@ -94,17 +113,37 @@ export function createRender (options) {
   }
 
   // 第一次渲染App组件的时候会执行，并且将render函数的this绑定为创建的代理对象
-  function setupRenderEffect (instance, vNode, container, parentComponent) {
-    // instance.render 来自于 finishComponentSetup 方法，就是组件的render方法
-    // 绑定this，让render中的this指向创建的代理对象
-    const subTree = instance.render.call(instance.proxy)
-    // vNode -> patch
-    // vNode -> element -> mountElement
-    patch(subTree, container, instance)
+  function setupRenderEffect (instance, vNode, container) {
+    /*
+    * 调用的组件实例的render方法结合组件的数据将视图渲染出来
+    *   因此更新的时候需要重新调用render函数渲染视图
+    *   将渲染操作使用effect包裹
+    * */
+    effect(() => {
+      if (!instance.isMounted) { // 初始化
+        console.log('init')
+        // instance.render 来自于 finishComponentSetup 方法，就是组件的render方法
+        // 绑定this，让render中的this指向创建的代理对象
+        const subTree = (instance.subTree = instance.render.call(instance.proxy))
+        // vNode -> patch
+        // vNode -> element -> mountElement
+        patch(null, subTree, container, instance)
 
-    // subTree指的就是class="root"的根节点
-    // 子元素处理完成之后
-    vNode.el = subTree.el
+        // subTree指的就是class="root"的根节点
+        // 子元素处理完成之后
+        vNode.el = subTree.el
+
+        instance.isMounted = true
+      } else { // 更新
+        console.log('update')
+        const subTree = instance.render.call(instance.proxy)
+        const prevSubTree = instance.subTree
+
+        instance.subTree = subTree // 更新subTree
+
+        patch(prevSubTree, subTree, container, instance)
+      }
+    })
   }
 
   return {

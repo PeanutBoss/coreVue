@@ -3,9 +3,9 @@ import { initProps } from "./componentProps";
 import { initSlots } from "./componentSlots";
 import { shallowReadonly } from '../reactivity/reactive'
 import { emit } from './componentEmit'
+import {proxyRef} from "../reactivity";
 
 export function createComponentInstance (vNode, parent) {
-  console.log(parent, 'parent')
   const component: any = {
     vNode,
     type: vNode.type,
@@ -14,6 +14,8 @@ export function createComponentInstance (vNode, parent) {
     slots: {},
     providers: parent ? parent.providers : {},
     parent,
+    isMounted: false, // 组件是否已经挂载
+    subTree: {},
     emit: () => {}
   }
   component.emit = emit.bind(null, component)
@@ -53,7 +55,8 @@ function setupStatefulComponent(instance) {
 function handleSetupResult (instance, setupResult) {
   // TODO
   if (typeof setupResult === 'object') {
-    instance.setupState = setupResult
+    // 为ref类型的数据做代理，可以直接访问，不需要.value
+    instance.setupState = proxyRef(setupResult)
   }
   finishComponentSetup(instance)
 }
