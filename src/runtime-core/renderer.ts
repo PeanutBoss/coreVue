@@ -1,8 +1,9 @@
-import { ShapeFlags } from "../share/ShapeFlags";
-import { createComponentInstance, setupComponent } from "./component";
-import { Fragment, Text } from "./vNode";
+import { ShapeFlags } from "../share/ShapeFlags"
+import { createComponentInstance, setupComponent } from "./component"
+import { Fragment, Text } from "./vNode"
 import { createAppAPI } from './createApp'
-import {effect} from "../reactivity/effect";
+import { effect } from '../reactivity/effect'
+import { EMPTY_OBJECT } from '../share'
 
 export function createRender (options) {
 
@@ -77,7 +78,7 @@ export function createRender (options) {
     // 处理vNode对应的属性
     for (const key in vNode.props) {
       const val = vNode.props[key]
-      hostPatchProp(el, key, val)
+      hostPatchProp(el, key, null, val)
     }
     // 将DOM添加到对应容器中
     hostInsert(el ,container)
@@ -92,6 +93,34 @@ export function createRender (options) {
     * props
     * children
     * */
+    const oldProps = oldVNode.props || EMPTY_OBJECT
+    const newProps = vNode.props || EMPTY_OBJECT
+    const el = (vNode.el = oldVNode.el)
+    console.log(oldProps, 'oldProps', newProps, 'newProps')
+    patchProps(el, oldProps, newProps)
+  }
+
+  function patchProps (el, oldProps, newProps) {
+    if (oldProps !== newProps) {
+      for (const key in newProps) {
+        const prevProp = oldProps[key]
+        const nextProp = newProps[key]
+
+        if (prevProp !== nextProp) {
+          hostPatchProp(el, key, prevProp, nextProp)
+        }
+      }
+
+      // 不存在老的props，不需要进行下面的操作
+      // if (!Object.keys(oldProps).length) return
+      if (oldProps !== EMPTY_OBJECT) {
+        for (const key in oldProps) {
+          if (!(key in newProps)) {
+            hostPatchProp(el, key, oldProps[key], null)
+          }
+        }
+      }
+    }
   }
 
   // 当children为数组时，处理子节点
