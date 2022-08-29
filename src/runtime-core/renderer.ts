@@ -10,7 +10,9 @@ export function createRender (options) {
   const {
     createElement: hostCreateElement,
     patchProp: hostPatchProp,
-    insert: hostInsert
+    insert: hostInsert,
+    remove: hostRemove,
+    setElementText: hostSetElementText
   } = options
 
   function render (vNode, container) {
@@ -59,7 +61,7 @@ export function createRender (options) {
     if (!oldVNode) {
       mountElement(vNode, container, parentComponent)
     } else {
-      patchElement(oldVNode, vNode, container)
+      patchElement(oldVNode, vNode, container, parentComponent)
     }
   }
 
@@ -73,7 +75,7 @@ export function createRender (options) {
       el.textContent = children
     } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
       // 如果是数组类型（说明有多个子元素），调用patch递归处理子节点
-      mountChildren(vNode, el, parentComponent)
+      mountChildren(vNode.children, el, parentComponent)
     }
     // 处理vNode对应的属性
     for (const key in vNode.props) {
@@ -84,7 +86,7 @@ export function createRender (options) {
     hostInsert(el ,container)
   }
 
-  function patchElement(oldVNode, vNode, container) {
+  function patchElement(oldVNode, vNode, container, parentComponent) {
     console.log('patchElement')
     console.log('oldVNode', oldVNode)
     console.log('vNode', vNode)
@@ -96,8 +98,40 @@ export function createRender (options) {
     const oldProps = oldVNode.props || EMPTY_OBJECT
     const newProps = vNode.props || EMPTY_OBJECT
     const el = (vNode.el = oldVNode.el)
-    console.log(oldProps, 'oldProps', newProps, 'newProps')
+
+    patchChildren(oldVNode, vNode, el, parentComponent)
     patchProps(el, oldProps, newProps)
+  }
+
+  function patchChildren (oldVNode, newVNode, container, parentComponent) {
+
+    const prevShapeFlag = oldVNode.shapeFlag
+    const oldChildren = oldVNode.children
+    const shapeFlag = newVNode.shapeFlag
+    const newChildren = newVNode.children
+
+    if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+      if (prevShapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+        // 1.把老的清空
+        unmountChildren(oldVNode.children)
+      }
+      if (newChildren !== oldChildren) {
+        // 2.设置新的text
+        hostSetElementText(container, newChildren)
+      }
+    } else {
+      hostSetElementText(container, '')
+      mountChildren(newChildren, container, parentComponent)
+    }
+
+  }
+
+  function unmountChildren (children) {
+    for (let i = 0; i < children.length; i++) {
+      const el = children[i].el
+      // remove
+      hostRemove(el)
+    }
   }
 
   function patchProps (el, oldProps, newProps) {
@@ -124,14 +158,14 @@ export function createRender (options) {
   }
 
   // 当children为数组时，处理子节点
-  function mountChildren (vNode, container, parentComponent) {
-    vNode.children.forEach(child => {
+  function mountChildren (children, container, parentComponent) {
+    children.forEach(child => {
       patch(null, child, container, parentComponent)
     })
   }
 
   function processFragment (oldVNode, vNode, container, parentComponent) {
-    mountChildren(vNode, container, parentComponent)
+    mountChildren(vNode.children, container, parentComponent)
   }
 
   function processText (oldVNode, vNode, container) {
