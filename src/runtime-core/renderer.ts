@@ -174,7 +174,6 @@ export function createRender (options) {
       }
     } else if (i > e2) {
       while (i <= e1) {
-        // TODO remove 无效 - parent找不到
         hostRemove(c1[i].el)
         i++
       }
