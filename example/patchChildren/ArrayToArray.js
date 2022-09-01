@@ -57,15 +57,47 @@ import { ref, h } from '../../lib/guide-mini-vue-esm.js'
 * (a b)
 * (a b) c
 * */
+// const prevChildren = [
+//     h('p', { key: 'A' }, 'A'),
+//     h('p', { key: 'B' }, 'B')
+// ]
+// const nextChildren = [
+//     h('p', { key: 'D' }, 'D'),
+//     h('p', { key: 'C' }, 'C'),
+//     h('p', { key: 'A' }, 'A'),
+//     h('p', { key: 'B' }, 'B')
+// ]
+
+/*
+* 4-1.老的比新的长 - 删除老的 - 左侧
+* (a b) c
+* (a b)
+* i = 2, e1 = 2, e2 = 1
+* */
 const prevChildren = [
-    h('p', { key: 'A' }, 'A'),
-    h('p', { key: 'B' }, 'B')
+  h('p', { key: 'A' }, 'A'),
+  h('p', { key: 'B' }, 'B'),
+  h('p', { key: 'C' }, 'C')
 ]
 const nextChildren = [
-    h('p', { key: 'C' }, 'C'),
-    h('p', { key: 'A' }, 'A'),
-    h('p', { key: 'B' }, 'B')
+  h('p', { key: 'A' }, 'A'),
+  h('p', { key: 'B' }, 'B')
 ]
+
+/*
+* 4-2.老的比新的长 - 删除老的 - 右侧
+* a (b c)
+* (b c)
+* */
+// const prevChildren = [
+//   h('p', { key: 'A' }, 'A'),
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'C' }, 'C')
+// ]
+// const nextChildren = [
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'C' }, 'C')
+// ]
 
 export default {
     name: 'ArrayToText',

@@ -12,8 +12,8 @@ export function createComponentInstance (vNode, parent) {
     setupState: {},
     props: {},
     slots: {},
-    providers: parent ? parent.providers : {},
     parent,
+    providers: parent ? parent.providers : {},
     isMounted: false, // 组件是否已经挂载
     subTree: {},
     emit: () => {}

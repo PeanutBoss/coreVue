@@ -165,12 +165,18 @@ export function createRender (options) {
     // 新的比老的长 - 创建
     if (i > e1) {
       if (i <= e2) {
-        const nextPos = i + 1
-        const anchor = i + 1 < l2 ? c2[nextPos].el : null
+        const nextPos = e2 + 1
+        const anchor = nextPos < l2 ? c2[nextPos].el : null
         while (i <= e2) {
           patch(null, c2[i], container, parentComponent, anchor)
           i++
         }
+      }
+    } else if (i > e2) {
+      while (i <= e1) {
+        // TODO remove 无效 - parent找不到
+        hostRemove(c1[i].el)
+        i++
       }
     }
   }
