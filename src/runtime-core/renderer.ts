@@ -203,6 +203,7 @@ export function createRender (options) {
         }
         let newIndex
         if (prevChild.key !== null) {
+          // 查找旧节点在新节点列表中的下标
           newIndex = keyToNewIndexMap.get(prevChild.key)
         } else {
           for (let k = s2; k <= e2; k++) {
