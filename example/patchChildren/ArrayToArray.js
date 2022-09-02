@@ -89,14 +89,57 @@ import { ref, h } from '../../lib/guide-mini-vue-esm.js'
 * a (b c)
 * (b c)
 * */
+// const prevChildren = [
+//   h('p', { key: 'A' }, 'A'),
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'C' }, 'C')
+// ]
+// const nextChildren = [
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'C' }, 'C')
+// ]
+
+/*
+* 5-1.对比中间 - 删除老的 - 老的多新的少
+* a b (c d) f g
+* a b (e c) f g
+* */
+// const prevChildren = [
+//   h('p', { key: 'A' }, 'A'),
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'C', id: 'c-prev' }, 'C'),
+//   h('p', { key: 'D' }, 'D'),
+//   h('p', { key: 'F' }, 'F'),
+//   h('p', { key: 'G' }, 'G')
+// ]
+// const nextChildren = [
+//   h('p', { key: 'A' }, 'A'),
+//   h('p', { key: 'B' }, 'B'),
+//   h('p', { key: 'E' }, 'E'),
+//   h('p', { key: 'C', id: 'c-next' }, 'C'),
+//   h('p', { key: 'F' }, 'F'),
+//   h('p', { key: 'G' }, 'G')
+// ]
+
+/*
+* 5-2.对比中间 - 删除老的 - 多出来的部分直接删掉
+* */
 const prevChildren = [
   h('p', { key: 'A' }, 'A'),
   h('p', { key: 'B' }, 'B'),
-  h('p', { key: 'C' }, 'C')
+  h('p', { key: 'C', id: 'c-prev' }, 'C'),
+  h('p', { key: 'E' }, 'E'),
+  h('p', { key: 'D' }, 'D'),
+  h('p', { key: 'F' }, 'F'),
+  h('p', { key: 'G' }, 'G')
 ]
 const nextChildren = [
+  h('p', { key: 'A' }, 'A'),
   h('p', { key: 'B' }, 'B'),
-  h('p', { key: 'C' }, 'C')
+  h('p', { key: 'E' }, 'E'),
+  h('p', { key: 'C', id: 'c-next' }, 'C'),
+  h('p', { key: 'F' }, 'F'),
+  h('p', { key: 'G' }, 'G')
 ]
 
 export default {

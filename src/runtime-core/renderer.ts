@@ -162,8 +162,8 @@ export function createRender (options) {
       e2--
     }
 
-    // 新的比老的长 - 创建
     if (i > e1) {
+      /* 新的比老的长 - 创建 */
       if (i <= e2) {
         const nextPos = e2 + 1
         const anchor = nextPos < l2 ? c2[nextPos].el : null
@@ -173,10 +173,54 @@ export function createRender (options) {
         }
       }
     } else if (i > e2) {
+      /* 老的比新的长 - 删除 */
       while (i <= e1) {
         hostRemove(c1[i].el)
         i++
       }
+    } else {
+      /* 对比中间部分 */
+      let s1 = i
+      let s2 = i
+      // 新节点总数量
+      const toBePatched = e2 - s2 + 1
+      // 处理过的数量
+      let patched = 0
+      // 创建新节点的映射表
+      const keyToNewIndexMap = new Map()
+
+      for (let j = s2; j <= e2; j++) {
+        const nextChild = c2[j]
+        keyToNewIndexMap.set(nextChild.key, j)
+      }
+
+      for (let j = s1; j <= e1; j++) {
+        const prevChild = c1[j]
+        // 如果新节点已经被遍历完
+        if (patched >= toBePatched) {
+          hostRemove(prevChild.el)
+          continue
+        }
+        let newIndex
+        if (prevChild.key !== null) {
+          newIndex = keyToNewIndexMap.get(prevChild.key)
+        } else {
+          for (let k = s2; k <= e2; k++) {
+            if (isSomeVNodeType(prevChild, c2[k])) {
+              newIndex = k
+              break
+            }
+          }
+        }
+        if (newIndex == undefined) {
+          hostRemove(prevChild.el)
+        } else {
+          patch(prevChild, c2[newIndex], container, parentComponent, null)
+          // patch一个就意味着处理完一个
+          patched++
+        }
+      }
+
     }
   }
 
