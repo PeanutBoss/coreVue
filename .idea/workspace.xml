@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/9.简单diff算法/vNode.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10.双端diff算法/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/11.快速Diff算法/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +70,7 @@
       <workItem from="1662167902869" duration="220000" />
       <workItem from="1662168773449" duration="1185000" />
       <workItem from="1662170549671" duration="8309000" />
+      <workItem from="1662192239281" duration="1747000" />
     </task>
     <servers />
   </component>
@@ -88,6 +90,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1662192905706">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1662192905706" />
     <state x="771" y="246" width="672" height="678" key="search.everywhere.popup" timestamp="1662171363399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
