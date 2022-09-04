@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/Diff算法/简单Diff算法.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Diff算法/双端Diff算法.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +45,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -67,6 +70,7 @@
       <updated>1660967908679</updated>
       <workItem from="1660967913577" duration="697000" />
       <workItem from="1660968628868" duration="89000" />
+      <workItem from="1662268539360" duration="47000" />
     </task>
     <servers />
   </component>
