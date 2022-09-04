@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/10.双端diff算法/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/11.快速Diff算法/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/10.双端diff算法/vNode.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/10.双端diff算法/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/10.双端diff算法/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="E:\WebStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -71,6 +72,7 @@
       <workItem from="1662168773449" duration="1185000" />
       <workItem from="1662170549671" duration="8309000" />
       <workItem from="1662192239281" duration="2409000" />
+      <workItem from="1662252090097" duration="11069000" />
     </task>
     <servers />
   </component>
