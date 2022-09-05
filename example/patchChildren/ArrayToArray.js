@@ -164,6 +164,50 @@ import { ref, h } from '../../lib/guide-mini-vue-esm.js'
 //   h('p', { key: 'G' }, 'G')
 // ]
 
+/*
+* 6-2.创建新的节点
+* */
+// const prevChildren = [
+//     h('p', { key: 'A' }, 'A'),
+//     h('p', { key: 'B' }, 'B'),
+//     h('p', { key: 'C' }, 'C'),
+//     h('p', { key: 'E' }, 'E'),
+//     h('p', { key: 'F' }, 'F'),
+//     h('p', { key: 'G' }, 'G')
+// ]
+// const nextChildren = [
+//     h('p', { key: 'A' }, 'A'),
+//     h('p', { key: 'B' }, 'B'),
+//     h('p', { key: 'E' }, 'E'),
+//     h('p', { key: 'C' }, 'C'),
+//     h('p', { key: 'D' }, 'D'),
+//     h('p', { key: 'F' }, 'F'),
+//     h('p', { key: 'G' }, 'G')
+// ]
+
+/*
+* 6-3.综合案例
+* */
+const prevChildren = [
+    h('p', { key: 'A' }, 'A'),
+    h('p', { key: 'B' }, 'B'),
+    h('p', { key: 'C' }, 'C'),
+    h('p', { key: 'D' }, 'D'),
+    h('p', { key: 'E' }, 'E'),
+    h('p', { key: 'Z' }, 'Z'),
+    h('p', { key: 'F' }, 'F'),
+    h('p', { key: 'G' }, 'G')
+]
+const nextChildren = [
+    h('p', { key: 'A' }, 'A'),
+    h('p', { key: 'B' }, 'B'),
+    h('p', { key: 'D' }, 'D'),
+    h('p', { key: 'C' }, 'C'),
+    h('p', { key: 'Y' }, 'Y'),
+    h('p', { key: 'E' }, 'E'),
+    h('p', { key: 'F' }, 'F'),
+    h('p', { key: 'G' }, 'G')
+]
 export default {
     name: 'ArrayToText',
     setup () {
