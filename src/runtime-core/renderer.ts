@@ -189,6 +189,13 @@ export function createRender (options) {
       // 创建新节点的映射表
       const keyToNewIndexMap = new Map()
 
+      let moved = false
+      let maxNewIndexSoFar = 0
+
+      let newIndexToOldInIndexMap = new Array(toBePatched)
+      // 初始化映射表  -  应该是填充 -1 - 标识没有建立映射关系
+      for (let j = 0; j < toBePatched; j++) newIndexToOldInIndexMap[j] = 0
+
       for (let j = s2; j <= e2; j++) {
         const nextChild = c2[j]
         keyToNewIndexMap.set(nextChild.key, j)
@@ -216,9 +223,39 @@ export function createRender (options) {
         if (newIndex == undefined) {
           hostRemove(prevChild.el)
         } else {
+          if (newIndex >= maxNewIndexSoFar) {
+            maxNewIndexSoFar = newIndex
+          } else {
+            moved = true
+          }
+
+          /* TODO - 注意映射值 */
+          newIndexToOldInIndexMap[newIndex - s2] = j + 1
           patch(prevChild, c2[newIndex], container, parentComponent, null)
           // patch一个就意味着处理完一个
           patched++
+        }
+      }
+
+      // 获取最长递增子序列
+      const increasingNewIndexSequence = getSequence(newIndexToOldInIndexMap)
+      let k = increasingNewIndexSequence.length - 1
+      for (let j = toBePatched - 1; j >= 0; j--) {
+        const nextIndex = i + s2
+        const nextChild = c2[nextIndex]
+        const anchor = nextIndex + 1 < l2 ? c2[nextIndex + 1].el : null
+
+        if (newIndexToOldInIndexMap[j] === 0) {
+          // 新创建节点
+          patch(null, nextChild, container, parentComponent, anchor)
+        } else if (moved) {
+          if (k < 0 || j !== increasingNewIndexSequence[k]) {
+            console.log('需要移动')
+            hostInsert(nextChild.el, container, anchor)
+          } else {
+            // 不需要移动
+            k++
+          }
         }
       }
 
@@ -312,3 +349,8 @@ export function createRender (options) {
     createApp: createAppAPI(render)
   }
 }
+
+function getSequence (array) {
+  return [1, 3]
+}
+
