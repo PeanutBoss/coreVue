@@ -27,7 +27,6 @@
     <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/11.快速Diff算法/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/11.快速Diff算法/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/11.快速Diff算法/vNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/11.快速Diff算法/vNode.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,8 @@
       <workItem from="1662192239281" duration="2409000" />
       <workItem from="1662252090097" duration="11069000" />
       <workItem from="1662381634768" duration="3553000" />
-      <workItem from="1662421126921" duration="2296000" />
+      <workItem from="1662421126921" duration="2546000" />
+      <workItem from="1662463576131" duration="6357000" />
     </task>
     <servers />
   </component>
