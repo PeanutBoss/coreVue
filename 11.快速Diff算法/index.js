@@ -32,4 +32,21 @@ function patchKeyedChildren (n1, n2, container) {
     oldVNode = oldChildren[oldEnd]
     newVNode = newChildren[newEnd]
   }
+
+  // 预处理完毕后，如果满足 j --> newEnd 之间的节点应该作为新节点插入
+  if (j > oldEnd && j <= newEnd) {
+    // 锚点的索引
+    const anchorIndex = newEnd + 1
+    // 得到锚点元素
+    const anchor = anchorIndex < newChildren.length ? newChildren[anchorIndex].el : null
+    // 将新增的节点逐个挂载
+    while (j <= newEnd) {
+      patch(null, newChildren[j++], container, anchor)
+    }
+  } else if (j > newEnd && j<= oldEnd) {
+    // 有要删除的节点
+    while (j <= oldEnd) {
+      unmount(oldChildren[j++])
+    }
+  }
 }
