@@ -45,16 +45,32 @@ export function createRender (options) {
   }
 
   function processComponent (oldVNode, vNode, container, parentComponent, anchor) {
-    mountComponent(vNode, container, parentComponent, anchor)
+    // 如果存在老的虚拟节点
+    if (!oldVNode) {
+      mountComponent(vNode, container, parentComponent, anchor)
+    } else {
+      updateComponent(oldVNode, vNode)
+    }
   }
 
-  function mountComponent (vNode, container, parentComponent, anchor) {
+  function updateComponent (oldVNode, vNode) {
+    // 与更新element同理
+    const instance = (vNode.component = oldVNode.component)
+
+    // 下次要更新的虚拟节点
+    instance.next = vNode
+
+    instance.update()
+  }
+
+  function mountComponent (initialVNode, container, parentComponent, anchor) {
     // 与mountElement同理，创建并返回一个组件对象
-    const instance = createComponentInstance(vNode, parentComponent)
+    // 将组件实例添加到虚拟节点对象上
+    const instance = (initialVNode.component = createComponentInstance(initialVNode, parentComponent))
 
     // 处理setup中的信息（例如：实现代理this）
     setupComponent(instance)
-    setupRenderEffect(instance, vNode, container, anchor)
+    setupRenderEffect(instance, initialVNode, container, anchor)
   }
 
   function processElement (oldVNode, vNode, container, parentComponent, anchor) {
@@ -335,6 +351,14 @@ export function createRender (options) {
         instance.isMounted = true
       } else { // 更新
         console.log('update')
+
+        // 需要一个更新完成后的虚拟节点，个更新之前的虚拟节点
+        const { next, vNode } = instance
+        if (next) {
+          next.el = vNode.el
+          updateComponentPreRender(instance, next)
+        }
+
         const subTree = instance.render.call(instance.proxy)
         const prevSubTree = instance.subTree
 
@@ -343,6 +367,10 @@ export function createRender (options) {
         patch(prevSubTree, subTree, container, instance, anchor)
       }
     })
+  }
+
+  function updateComponentPreRender (instance, nextVNode) {
+
   }
 
   return {

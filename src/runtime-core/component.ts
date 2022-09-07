@@ -9,6 +9,7 @@ export function createComponentInstance (vNode, parent) {
   const component: any = {
     vNode,
     type: vNode.type,
+    next: null,
     setupState: {},
     props: {},
     slots: {},
