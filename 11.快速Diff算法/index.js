@@ -190,5 +190,46 @@ function patchKeyedChildrenV1 (n1, n2, container) {
         unmount(oldVNode)
       }
     }
+
+    if (moved) {
+      // 求得最长递增子序列
+      const seq = lis(source)
+
+      // s 指向最长递增子序列的最后一个元素
+      let s = seq.length - 1
+      // i 指向新的一组节点的最后一个元素
+      let i = count - 1
+      // for 循环使 i 递减
+      for (i; i >= 0; i--) {
+        if (source[i] === -1) { // 说明索引为 i 的节点使新的节点，应该将其挂载
+          // i + newStart 获取该节点在整个 newChildren 中的索引
+          const pos = i + newStart
+          const newVNode = newChildren[pos]
+          // 以下一个元素作为锚点，取得它的索引
+          const nextPos = pos + 1
+          const anchor = nextPos < newChildren.length ? newChildren[nextPos].el : null
+          // 挂载操作
+          patch(null, newVNode, container, anchor)
+        } else if (i !== seq[s]) { // 说明该节点需要移动
+          // 获取该节点在 newChildren 中的索引
+          const pos = i + newStart
+          const newVNode = newChildren[pos]
+          // 获取锚点元素的索引
+          const nextPos = pos + 1
+          const anchor = nextPos < newChildren.length ? newChildren[nextPos].el : null
+          // 插入当前节点
+          insert(newVNode.el, container, anchor)
+        } else {
+          // 当 i === seq[s] 时，说明该位置节点不需要移动
+          // 只需要让 s 指向下一个位置
+          s--
+        }
+      }
+    }
   }
+}
+
+// 求最长递增子序列
+function lis (source) {
+  return []
 }
