@@ -24,7 +24,7 @@ export function createRender (options) {
   * oldVNode - 不存在说明初始化，存在说明更新
   * */
   function patch (oldVNode, vNode, container, parentComponent, anchor) {
-    // ShapeFlags - &
+    // ShapeFlags
     const { shapeFlag, type } = vNode
 
     switch (type) {
