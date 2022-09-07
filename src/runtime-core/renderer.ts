@@ -4,6 +4,7 @@ import { Fragment, Text } from "./vNode"
 import { createAppAPI } from './createApp'
 import { effect } from '../reactivity/effect'
 import { EMPTY_OBJECT } from '../share'
+import { shouldUpdateComponent } from './componentUpdateUtils'
 
 export function createRender (options) {
 
@@ -54,13 +55,16 @@ export function createRender (options) {
   }
 
   function updateComponent (oldVNode, vNode) {
-    // 与更新element同理
+    // 与更新element同理 - 不需要更新的时候也是要执行的
     const instance = (vNode.component = oldVNode.component)
-
-    // 下次要更新的虚拟节点
-    instance.next = vNode
-
-    instance.update()
+    if (shouldUpdateComponent(oldVNode, vNode)) {
+      // 下次要更新的虚拟节点
+      instance.next = vNode
+      instance.update()
+    } else {
+      vNode.el = oldVNode.el
+      instance.vNode = vNode
+    }
   }
 
   function mountComponent (initialVNode, container, parentComponent, anchor) {
@@ -334,7 +338,8 @@ export function createRender (options) {
     *   因此更新的时候需要重新调用render函数渲染视图
     *   将渲染操作使用effect包裹
     * */
-    effect(() => {
+    // 组件更新的话重新调用effect返回的runner
+    instance.update = effect(() => {
       if (!instance.isMounted) { // 初始化
         console.log('init')
         // instance.render 来自于 finishComponentSetup 方法，就是组件的render方法
@@ -370,7 +375,9 @@ export function createRender (options) {
   }
 
   function updateComponentPreRender (instance, nextVNode) {
-
+    instance.vNode = nextVNode
+    instance.next = null
+    instance.props = nextVNode.props
   }
 
   return {
