@@ -5,6 +5,7 @@ import { createAppAPI } from './createApp'
 import { effect } from '../reactivity/effect'
 import { EMPTY_OBJECT } from '../share'
 import { shouldUpdateComponent } from './componentUpdateUtils'
+import {queueJobs} from "./scheduler";
 
 export function createRender (options) {
 
@@ -107,9 +108,9 @@ export function createRender (options) {
   }
 
   function patchElement(oldVNode, vNode, container, parentComponent, anchor) {
-    console.log('patchElement')
-    console.log('oldVNode', oldVNode)
-    console.log('vNode', vNode)
+    // console.log('patchElement')
+    // console.log('oldVNode', oldVNode)
+    // console.log('vNode', vNode)
 
     /*
     * props
@@ -270,7 +271,7 @@ export function createRender (options) {
           patch(null, nextChild, container, parentComponent, anchor)
         } else if (moved) {
           if (k < 0 || j !== increasingNewIndexSequence[k]) {
-            console.log('需要移动')
+            // console.log('需要移动')
             hostInsert(nextChild.el, container, anchor)
           } else {
             // 不需要移动
@@ -325,7 +326,7 @@ export function createRender (options) {
   }
 
   function processText (oldVNode, vNode, container) {
-    console.log(vNode, container)
+    // console.log(vNode, container)
     const { children } = vNode
     const textNode = vNode.el = document.createTextNode(children)
     container.append(textNode)
@@ -339,6 +340,10 @@ export function createRender (options) {
     *   将渲染操作使用effect包裹
     * */
     // 组件更新的话重新调用effect返回的runner
+    /*
+    * 数据修改后更新视图的操作不能立即执行 update，应该将他存到微任务中，执行栈清空的时候再去更新视图
+    * 通过设计响应式系统时的 scheduler 实现
+    * */
     instance.update = effect(() => {
       if (!instance.isMounted) { // 初始化
         console.log('init')
@@ -370,6 +375,15 @@ export function createRender (options) {
         instance.subTree = subTree // 更新subTree
 
         patch(prevSubTree, subTree, container, instance, anchor)
+      }
+    }, {
+      /*
+      * 视图更新时不会去立即触发传入effect的fn函数（不会立即更新视图）
+      * 将更新视图的操作放到 scheduler 中
+      * */
+      scheduler: () => {
+        console.log('update-scheduler')
+        queueJobs(instance.update)
       }
     })
   }
