@@ -25,9 +25,31 @@ function parseChildren (context) {
     }
     node = parseElement(context)
   }
+
+  // 如果 node 没有值，则当作text解析
+  if (!node) {
+    node = parseText(context)
+  }
+
   nodes.push(node)
 
   return nodes
+}
+
+function parseText (context) {
+  const content = parseTextData(context, context.source.length)
+  return {
+    type: NodeTypes.TEXT,
+    content
+  }
+}
+
+function parseTextData (context, length) {
+  // 1.获取当前内容
+  const content = context.source.slice(0, length)
+  // 2.更新进度
+  advanceBy(context, length)
+  return content
 }
 
 function parseElement (context: any) {
@@ -63,7 +85,8 @@ function parseInterpolation (context) {
   advanceBy(context, openDelimiter.length)
   // 计算 closeIndex 的时候还没删除前面两个字符
   const rawContentLength = closeIndex - openDelimiter.length
-  const rawContent = context.source.slice(0, rawContentLength)
+  // const rawContent = context.source.slice(0, rawContentLength)
+  const rawContent = parseTextData(context, rawContentLength)
   const content = rawContent.trim()
 
   // 将处理后的字符全部删掉 - 因为已经删了{{，所以需要用 rawContentLength+2 删除 插值和}} 内容
