@@ -1,5 +1,10 @@
 import { NodeTypes } from "./ast";
 
+enum TagType {
+  Start,
+  End
+}
+
 export function baseParse (content: string) {
   // 创建一个全局上下文对象
   const context = createParserContent(content)
@@ -10,12 +15,41 @@ function parseChildren (context) {
 
   const nodes: any = []
   let node
-  if (context.source.startsWith('{{')) {
+  const s = context.source
+  if (s.startsWith('{{')) {
     node = parseInterpolation(context)
+  } else if (s[0] === '<') {
+    // 以 < 开头 且 < 后跟字母 说明遇到了标签
+    if (/a-z/i.test(s[1])) {
+      parseElement(context)
+    }
+    node = parseElement(context)
   }
   nodes.push(node)
 
   return nodes
+}
+
+function parseElement (context: any) {
+  const element = parseTag(context, TagType.Start)
+  parseTag(context, TagType.End)
+  return element
+}
+
+function parseTag (context, type: TagType) {
+  // 1.解析tag
+  const match: any = /^<\/?([a-z]*)/i.exec(context.source)
+  const tag = match[1]
+  // 2.删除处理完的部分
+  advanceBy(context, match[0].length) // 处理 <div 部分
+  advanceBy(context, 1) // 处理右尖括号
+
+  if (type === TagType.End) return
+
+  return {
+    type: NodeTypes.ELEMENT,
+    tag
+  }
 }
 
 function parseInterpolation (context) {
