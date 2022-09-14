@@ -22,18 +22,16 @@ function parseChildren (context, parentTag) {
     if (s.startsWith('{{')) {
       node = parseInterpolation(context)
     } else if (s[0] === '<') {
-      // 以 < 开头 且 < 后跟字母 说明遇到了标签
-      if (/a-z/i.test(s[1])) {
-        parseElement(context)
+      // 以<开头 且 <后跟字母 说明遇到了标签
+      if (/[a-z]/i.test(s[1])) {
+        node = parseElement(context)
       }
-      node = parseElement(context)
     }
-
+    console.log(node, 'node')
     // 如果 node 没有值，则当作text解析
     if (!node) {
       node = parseText(context)
     }
-
     nodes.push(node)
   }
 
@@ -54,15 +52,12 @@ function isEnd (context, parentTag) {
 function parseText (context) {
   let endToken = '{{'
   let endIndex = context.source.length
-// debugger
   const index = context.source.indexOf(endToken)
   // 判断是否遇到 {{，如果遇到了更新endIndex
   if (index !== -1) {
     endIndex = index
   }
-  // debugger
   const content = parseTextData(context, endIndex)
-  console.log(context, 'content----------------------------')
   return {
     type: NodeTypes.TEXT,
     content
@@ -89,7 +84,6 @@ function parseElement (context: any) {
 
 function parseTag (context, type: TagType) {
   // 1.解析tag
-  debugger
   const match: any = /^<\/?([a-z]*)/i.exec(context.source)
   const tag = match[1]
   // 2.删除处理完的部分
