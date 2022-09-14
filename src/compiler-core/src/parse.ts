@@ -46,7 +46,6 @@ function isEnd (context, ancestors) {
   if (s.startsWith('</')) {
     for (let i = ancestors.length - 1; i >= 0; i--) {
       const tag = ancestors[i].tag // 取出当前tag
-      if (s.slice(2, 2 + tag.length) === tag) { // 如果
       if (startsWithEndTagOpen(s, tag)) { // 如果
         return true
       }
