@@ -11,7 +11,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2DbVjlU9lrf7yWTNAu5hXtEdZIt" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,5 +42,22 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="419" y="163" width="1326" height="741" key="DiffContextDialog" timestamp="1663236207463">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="419" y="163" width="1326" height="741" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1663236207463" />
   </component>
 </project>
