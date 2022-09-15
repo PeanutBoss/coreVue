@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="" />
+    <list default="true" id="d052254b-14e8-42da-93c3-0d6e7b3e6463" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/11.快速Diff算法/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/11.快速Diff算法/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,7 +37,11 @@
   </component>
   <component name="ProjectId" id="2DbVjlU9lrf7yWTNAu5hXtEdZIt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+<<<<<<< HEAD
     <ConfirmationsSetting value="2" id="Add" />
+=======
+    <ConfirmationsSetting value="2" id="添加" />
+>>>>>>> d300798f16ca4d9449641ee6995e1abf06400af6
   </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -23,8 +52,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="E:\WebStorm 2020.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -37,6 +73,16 @@
       <option name="presentableId" value="Default" />
       <updated>1660967908679</updated>
       <workItem from="1660967913577" duration="422000" />
+      <workItem from="1661263009927" duration="14000" />
+      <workItem from="1661556798751" duration="83000" />
+      <workItem from="1662167902869" duration="220000" />
+      <workItem from="1662168773449" duration="1185000" />
+      <workItem from="1662170549671" duration="8309000" />
+      <workItem from="1662192239281" duration="2409000" />
+      <workItem from="1662252090097" duration="11069000" />
+      <workItem from="1662381634768" duration="3553000" />
+      <workItem from="1662421126921" duration="2546000" />
+      <workItem from="1662463576131" duration="6357000" />
     </task>
     <servers />
   </component>
@@ -53,11 +99,25 @@
         </entry>
       </map>
     </option>
+<<<<<<< HEAD
   </component>
   <component name="WindowStateProjectService">
     <state x="419" y="163" width="1326" height="741" key="DiffContextDialog" timestamp="1663236207463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="419" y="163" width="1326" height="741" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1663236207463" />
+=======
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1662192905706">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1662192905706" />
+    <state x="771" y="246" width="672" height="678" key="search.everywhere.popup" timestamp="1662171363399">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="771" y="246" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1662171363399" />
+>>>>>>> d300798f16ca4d9449641ee6995e1abf06400af6
   </component>
 </project>

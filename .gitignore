@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 /idea
 
 node_modules
 
 lib
+=======
+node_modules
+
+.idea
+
+/.idea
+
+>>>>>>> d300798f16ca4d9449641ee6995e1abf06400af6
