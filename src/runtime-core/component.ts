@@ -35,7 +35,7 @@ function setupStatefulComponent(instance) {
   // 第一次patch的时候instance.type就是传入的App组件
   const Component = instance.type
 
-  // 创建一个代理对象用来拦截render函数中的this
+  // 创建一个代理对象用来拦截render函数中的this  目标对象有一个 _ 属性，它的值是当前组件的实例对象
   instance.proxy = new Proxy({ _: instance }, PublicInstanceProxyHandlers)
 
   const { setup } = Component

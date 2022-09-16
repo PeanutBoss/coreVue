@@ -14,6 +14,7 @@ export function createVNode (type, props?, children?) {
     shapeFlag: getShapeFlag(type),
     el: null
   }
+  // 子节点是
   if (typeof children === 'string') {
     vNode.shapeFlag |= ShapeFlags.TEXT_CHILDREN
   } else if (Array.isArray(children)) {

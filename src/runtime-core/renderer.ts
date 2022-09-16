@@ -349,6 +349,7 @@ export function createRender (options) {
         console.log('init')
         // instance.render 来自于 finishComponentSetup 方法，就是组件的render方法
         // 绑定this，让render中的this指向创建的代理对象
+        // 然后通过this访问组件的信息时，会被实例的 proxy 对象拦截而获取实例的setup返回的数据或props中的数据
         const subTree = (instance.subTree = instance.render.call(instance.proxy))
         // vNode -> patch
         // vNode -> element -> mountElement
