@@ -21,42 +21,51 @@ describe('effect', () => {
   })
 })
 
-// it('should return runner when call effect', () => {
-//   let foo = 10
-//   const runner = effect(() => {
-//     foo++
-//     return 'foo'
-//   })
-//   expect(foo).toBe(11)
-//   const r= runner()
-//   expect(foo).toBe(12)
-//   expect(r).toBe('foo')
-// })
-//
-// /*
-// * 1.通过 effect 的第二个参数-一个scheduler的 fn
-// * 2.effect 第一次执行的时候还会执行fn
-// * 3.当响应式对象发生 set 的时候（更新的时候），不会执行fn，而是执行scheduler
-// * 4.如果当执行 runner 的时候，会再次执行fn
-// * */
-// it('scheduler', () => {
-//   let dummy
-//   let run: any
-//   const scheduler = jest.fn(() => {
-//     run = runner
-//   })
-//   const obj = reactive({ foo: 1 })
-//   const runner = effect(() => {
-//     dummy = obj.foo
-//   }, { scheduler })
-//   expect(scheduler).not.toHaveBeenCalled()
-//   expect(dummy).toBe(1)
-//   obj.foo++
-//   expect(dummy).toBe(1)
-//   run()
-//   expect(dummy).toBe(2)
-// })
-//
+it('should return runner when call effect', () => {
+  let foo = 10
+  // 传入effect的fn，执行时foo会递增且返回字符串foo
+  const runner = effect(() => {
+    foo++
+    return 'foo'
+  })
+  // 期望：foo = 11
+  expect(foo).toBe(11)
+  const r = runner()
+  // 期望：foo = 12
+  expect(foo).toBe(12)
+  // 期望：r = ‘foo’
+  expect(r).toBe('foo')
+})
+
+/*
+* 1.通过 effect 的第二个参数-一个scheduler的 fn
+* 2.effect 第一次执行的时候还会执行fn
+* 3.当响应式对象发生 set 的时候（更新的时候），不会执行fn，而是执行scheduler
+* 4.如果执行 runner 的时候，会再次执行fn
+* */
+it('scheduler', () => {
+  let dummy
+  let run: any
+  const scheduler = jest.fn(() => {
+    run = runner
+  })
+  const obj = reactive({ foo: 1 })
+  const runner = effect(() => {
+    dummy = obj.foo
+  }, { scheduler })
+  // scheduler不会被调用
+  expect(scheduler).not.toHaveBeenCalled()
+  // 期望：dummy = 1
+  expect(dummy).toBe(1)
+  // foo递增，触发依赖
+  obj.foo++
+  // 期望：dummy = 1
+  expect(dummy).toBe(1)
+  run()
+  // dummy = 2
+  expect(dummy).toBe(2)
+})
+
 // it('stop', () => {
 //   let dummy
 //   const obj = reactive({ prop: 1 })

@@ -45,7 +45,7 @@ describe('effect', () => {
 })
 ```
 
-> 实现`effect`的时候遇到一个问题，单测运行到`expect(nextAge).toBe(12)`的时候结果是单测执行不通过。期望nextAge等于12，但实际等于11  
+> 实现`effect`的时候遇到一个问题，单测运行到`expect(nextAge).toBe(12)`的时候结果是单测执行不通过。期望nextAge等于12，但实际等于11，
 >   检查了好几遍 effect 相关代码都没有问题，debug的时候发现问题出在了reactive里面。  
 > 刚开始实现reactive的时候，并没有添加收集和触发依赖的逻辑（收集和触发依赖的逻辑是在实现effect的时候才加上的），
 >   在get/set内部直接通过Reflect.get/set返回结果。后来实现effect时，需要添加收集、触发依赖相关的逻辑，
@@ -85,3 +85,26 @@ function reactive (raw) {
   })
 }
 ```
+
+#### runner
+
+##### 描述
+
+> 执行`effect`中的fn会返回一个函数（被称为runner），调用runner时会再次执行fn，并返回fn的返回值。
+
+##### 实现
+
+ effect返回ReactiveEffect实例的run方法（this指向），run方法调用的时候返回fn的执行结果
+
+#### scheduler
+
+##### 描述
+
+> 通过 effect 的第二个参数-一个scheduler的 fn  
+> effect 第一次执行的时候还会执行fn  
+> 当响应式对象发生 set 的时候（更新的时候），不会执行fn，而是执行scheduler  
+> 如果执行 runner 的时候，会再次执行fn
+
+##### 实现
+
+ effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断之心`run`和`scheduler`  
