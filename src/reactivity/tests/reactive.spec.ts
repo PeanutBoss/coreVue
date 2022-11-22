@@ -3,7 +3,7 @@ import { reactive } from '../reactive'
 describe('reactive', () => {
   it('happy path', () => {
     const original = { foo: 1 }
-    // 创建代理对象
+    // ---reactive--- 1.创建代理对象 -> 2.实现reactive
     const observed = reactive(original)
     // 代理对象不等于原始对象
     expect(observed).not.toBe(original)

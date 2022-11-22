@@ -1,24 +1,26 @@
-// import { reactive } from '../reactive'
-// import { effect, stop } from '../effect'
-//
-// describe('effect', () => {
-//   it('happy path', () => {
-//     const user = reactive({
-//       age: 10
-//     })
-//
-//     let nextAge
-//     effect(() => {
-//       nextAge = user.age + 1
-//     })
-//
-//     expect(nextAge).toBe(11)
-//
-//     user.age++
-//     expect(nextAge).toBe(12)
-//   })
-// })
-//
+import { reactive } from '../reactive'
+import { effect } from '../effect'
+
+describe('effect', () => {
+  it('happy path', () => {
+    const user = reactive({
+      age: 10
+    })
+
+    let nextAge
+    effect(() => {
+      nextAge = user.age + 1
+    })
+
+    expect(nextAge).toBe(11)
+
+    // ---reactive--- 4.收集依赖 -> 5.实现依赖收集
+    user.age++
+    console.log(user.age, '------------')
+    expect(nextAge).toBe(12)
+  })
+})
+
 // it('should return runner when call effect', () => {
 //   let foo = 10
 //   const runner = effect(() => {
