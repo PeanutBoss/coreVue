@@ -9,6 +9,7 @@ class ReactiveEffect {
   }
 }
 
+// 暂存处于激活状态中的effect
 let activeEffect
 // 保存所有对象所有key对应的dep
 const targetMap = new Map()
