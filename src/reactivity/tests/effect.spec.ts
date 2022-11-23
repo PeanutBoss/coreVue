@@ -1,5 +1,5 @@
 import { reactive } from '../reactive'
-import { effect } from '../effect'
+import { effect, stop } from '../effect'
 
 describe('effect', () => {
   it('happy path', () => {
@@ -24,7 +24,7 @@ describe('effect', () => {
 it('should return runner when call effect', () => {
   let foo = 10
   // 传入effect的fn，执行时foo会递增且返回字符串foo
-  const runner = effect(() => {
+  const runner: any = effect(() => {
     foo++
     return 'foo'
   })
@@ -66,30 +66,30 @@ it('scheduler', () => {
   expect(dummy).toBe(2)
 })
 
-// it('stop', () => {
-//   let dummy
-//   const obj = reactive({ prop: 1 })
-//   const runner = effect(() => {
-//     dummy = obj.prop
-//   })
-//   obj.prop = 2
-//   expect(dummy).toBe(2)
-//   stop(runner)
-//
-//   // obj.prop = 3
-//
-//   obj.prop++
-//   // obj.prop = obj.prop + 1  触发了get和set
-//   /*
-//   * 执行fn的时候会执行响应式对象的get操作，会把依赖重新收集起来
-//   * 所以解决方法是执行fn的时候不让它重新收集依赖
-//   * */
-//
-//   expect(dummy).toBe(2)
-//   runner()
-//   expect(dummy).toBe(3)
-// })
-//
+it('stop', () => {
+  let dummy
+  const obj = reactive({ prop: 1 })
+  const runner: any = effect(() => {
+    dummy = obj.prop
+  })
+  obj.prop = 2
+  expect(dummy).toBe(2)
+  stop(runner)
+
+  // obj.prop = 3
+
+  obj.prop++
+  // obj.prop = obj.prop + 1  触发了get和set
+  /*
+  * 执行fn的时候会执行响应式对象的get操作，会把依赖重新收集起来
+  * 所以解决方法是执行fn的时候不让它重新收集依赖
+  * */
+
+  expect(dummy).toBe(2)
+  runner()
+  expect(dummy).toBe(3)
+})
+
 // it('onStop', () => {
 //   const obj = reactive({
 //     foo: 1

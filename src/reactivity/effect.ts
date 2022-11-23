@@ -41,8 +41,12 @@ export function trigger (target, key) {
 }
 
 // ---reactive--- 3.实现effect -> 4.收集依赖
-export function effect (fn, options) {
+export function effect (fn, options?) {
   const _effect = new ReactiveEffect(fn)
 
   _effect.run()
+}
+
+export function stop (runner) {
+
 }

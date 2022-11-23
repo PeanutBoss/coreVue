@@ -5,6 +5,16 @@
 > vue官方文档中对`reactive`的描述是返回一个对象的响应式代理。即调用reactive方法得到的数据是响应式的，当该响应时对象发生变化时，依赖该对象的
 >   表达式也会发生改变。  
 
+#### readonly
+
+#### 描述
+
+> 创建只读的响应式代理，不能被set
+
+#### 实现
+
+> get陷阱函数不需要收集依赖
+
 ### effect
 
 #### 需要理清的问题
@@ -108,3 +118,15 @@ function reactive (raw) {
 ##### 实现
 
  effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断之心`run`和`scheduler`  
+
+#### stop
+
+##### 描述
+
+> 调用stop方法（传入runner），当更新响应式对象的时候将不会触发依赖；再次调用runner，恢复更新
+
+##### 实现
+
+ - 1.触发依赖是遍历执行依赖集合中所有effect的run/scheduler方法，因此停止触发依赖，需要在stop的时候将 effect 从依赖集合中删除即可  
+ - 2.收集依赖的时候将effect添加到一个key对应的依赖集合中，删除依赖的时候需要找到依赖集合，因此需要通过effect反向收集dep  
+ - 3.一个fn中可能依赖多个响应式数据，因此effect可能会收集多个dep（开始没理解的一些问题）
