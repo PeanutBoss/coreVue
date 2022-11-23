@@ -107,4 +107,4 @@ function reactive (raw) {
 
 ##### 实现
 
- effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断之心`run`和`scheduler`  
+ effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断执行`run`和`scheduler`  
