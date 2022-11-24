@@ -16,7 +16,6 @@ describe('effect', () => {
 
     // ---reactive--- 4.收集依赖 -> 5.实现依赖收集
     user.age++
-    console.log(user.age, '------------')
     expect(nextAge).toBe(12)
   })
 })
