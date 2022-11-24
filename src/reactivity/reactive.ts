@@ -9,3 +9,11 @@ export function reactive (raw) {
 export function readonly (raw) {
   return new Proxy(raw, readonlyHandler)
 }
+
+export function isReactive (target) {
+  return target['__isReactive']
+}
+
+export function isReadonly (target) {
+  return target['__isReadonly']
+}

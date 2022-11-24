@@ -1,4 +1,4 @@
-import { reactive } from '../reactive'
+import { reactive, isReadonly, isReactive } from '../reactive'
 
 describe('reactive', () => {
   it('happy path', () => {
@@ -9,8 +9,8 @@ describe('reactive', () => {
     expect(observed).not.toBe(original)
     // 代理对象的foo属性等于1
     expect(observed.foo).toBe(1)
-    // isReactive(observed) === true
-    // expect(isReactive(observed)).toBe(true)
+    isReactive(observed) === true
+    expect(isReactive(observed)).toBe(true)
     // expect(isReactive(original)).toBe(false)
     // expect(isProxy(observed)).toBe(true)
   })
