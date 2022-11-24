@@ -1,11 +1,11 @@
 import { track, trigger } from "./effect";
+import { Reactive } from './reactive'
 
 function createGetter (isReadonly = false) {
   return function (target, key) {
-      console.log(key, 'key---------------------')
-    if (key === '__isReactive') {
+    if (key === Reactive.IS_REACTIVE) {
       return !isReadonly
-    } else if (key === '__isReadonly') {
+    } else if (key === Reactive.IS_READONLY) {
       return isReadonly
     }
 
