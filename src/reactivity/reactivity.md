@@ -117,7 +117,7 @@ function reactive (raw) {
 
 ##### 实现
 
- effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断之心`run`和`scheduler`  
+ effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断执行`run`和`scheduler`  
 
 #### stop
 
@@ -130,3 +130,7 @@ function reactive (raw) {
  - 1.触发依赖是遍历执行依赖集合中所有effect的run/scheduler方法，因此停止触发依赖，需要在stop的时候将 effect 从依赖集合中删除即可  
  - 2.收集依赖的时候将effect添加到一个key对应的依赖集合中，删除依赖的时候需要找到依赖集合，因此需要通过effect反向收集dep  
  - 3.一个fn中可能依赖多个响应式数据，因此effect可能会收集多个dep（开始没理解的一些问题）
+
+##### 实现遇到的问题
+
+ - 1.activeEffect为空的问题，读取depsList时报错

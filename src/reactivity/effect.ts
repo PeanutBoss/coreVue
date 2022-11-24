@@ -1,12 +1,30 @@
+import { extend } from '../share/index'
+
 class ReactiveEffect {
   private _fn: any
+  depsList: any = []
+  private active = true // 是否需要删除依赖的标识
+  onStop: any
   constructor(fn, public scheduler?) {
     this._fn = fn
   }
   run () {
+    // 依赖被收集
+    this.active = true
     // 用全局变量 activeEffect 保存当前的 effect 实例，收集依赖时使用
     activeEffect = this
     return this._fn()
+  }
+  stop () {
+    // 如果依赖被删除，直接return
+    if (!this.active) return
+    // 将当前依赖从它所属的所有依赖集合中清除
+    this.depsList.forEach(
+      deps => deps.delete(this)
+    )
+    this.onStop && this.onStop()
+    // 依赖被清除
+    this.active = false
   }
 }
 
@@ -34,6 +52,17 @@ export function track (target, key) {
   }
   // 将这个 effect 实例添加到这个 key 的依赖集合中
   deps.add(activeEffect)
+
+  /*
+  * 收集依赖时activeEffect可能为undefined
+  * 使用effect时会先执行一次传入的fn，执行fn之前会给activeEffect赋值为当前的依赖
+  *   然后才触发它的get拦截方法，收集依赖没有问题
+  * 但是直接做读取操作的时候，activeEffect就是undefined
+  * */
+  if (!activeEffect) return
+
+  // 反向收集依赖集合（这个依赖项被哪些依赖集合收集）
+  activeEffect.depsList.push(deps)
 }
 
 // 触发依赖
@@ -54,18 +83,27 @@ export function trigger (target, key) {
 }
 
 // ---reactive--- 3.实现effect -> 4.收集依赖
-export function effect (fn, options?) {
+export function effect (fn, options: any = {}) {
   // 创建effect实例
-  const _effect = new ReactiveEffect(fn)
+  const _effect = new ReactiveEffect(fn, options.scheduler)
+
+  // 合并_effect和options
+  // _effect.onStop = options.onStop
+  extend(_effect, options)
 
   // 先调用一次fn
   _effect.run()
 
   // 返回runner，因为runner执行时会再次调用fn，所以返回effect的run方法即可
   // 因为 run 方法中的 activeEffect = this 要将 activeEffect 设置为当前的 effect，所以给它绑定this为_effect
-  return _effect.run.bind(_effect)
+  const runner: any = _effect.run.bind(_effect)
+  // 把effect保存到runner中，供stop时使用
+  runner.effect = _effect
+
+  return runner
 }
 
+// 停止触发依赖
 export function stop (runner) {
-
+  runner.effect.stop()
 }

@@ -76,9 +76,9 @@ it('stop', () => {
   expect(dummy).toBe(2)
   stop(runner)
 
-  // obj.prop = 3
+  obj.prop = 3
 
-  obj.prop++
+  // obj.prop++
   // obj.prop = obj.prop + 1  触发了get和set
   /*
   * 执行fn的时候会执行响应式对象的get操作，会把依赖重新收集起来
@@ -90,15 +90,15 @@ it('stop', () => {
   expect(dummy).toBe(3)
 })
 
-// it('onStop', () => {
-//   const obj = reactive({
-//     foo: 1
-//   })
-//   const onStop = jest.fn()
-//   let dummy
-//   const runner = effect(() => {
-//     dummy = obj.foo
-//   }, { onStop })
-//   stop(runner)
-//   expect(onStop).toBeCalledTimes(1)
-// })
+it('onStop', () => {
+  const obj = reactive({
+    foo: 1
+  })
+  const onStop = jest.fn()
+  let dummy
+  const runner = effect(() => {
+    dummy = obj.foo
+  }, { onStop })
+  stop(runner)
+  expect(onStop).toBeCalledTimes(1)
+})
