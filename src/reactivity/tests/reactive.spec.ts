@@ -1,4 +1,4 @@
-import { reactive, isReadonly, isReactive } from '../reactive'
+import { reactive, isReactive } from '../reactive'
 
 describe('reactive', () => {
   it('happy path', () => {
@@ -16,18 +16,18 @@ describe('reactive', () => {
   })
 })
 
-// // 测试嵌套对象
-// describe('nested reactive', () => {
-//   const original = {
-//     nested: { foo: 1 },
-//     array: [{ bar: 2 }]
-//   }
-//   // 创建嵌套对象的代理
-//   const observed = reactive(original)
-//   // 代理对象的nested属性是reactive
-//   expect(isReactive(observed.nested)).toBe(true)
-//   // 代理对象的array属性是reactive
-//   expect(isReactive(observed.array)).toBe(true)
-//   // 代理对象的array属性的第一项是reactive
-//   expect(isReactive(observed.array[0])).toBe(true)
-// })
+// 测试嵌套对象
+describe('nested reactive', () => {
+  const original = {
+    nested: { foo: 1 },
+    array: [{ bar: 2 }]
+  }
+  // 创建嵌套对象的代理
+  const observed = reactive(original)
+  // 代理对象的nested属性是reactive
+  expect(isReactive(observed.nested)).toBe(true)
+  // 代理对象的array属性是reactive
+  expect(isReactive(observed.array)).toBe(true)
+  // 代理对象的array属性的第一项是reactive
+  expect(isReactive(observed.array[0])).toBe(true)
+})

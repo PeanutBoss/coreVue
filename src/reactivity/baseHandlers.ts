@@ -1,5 +1,5 @@
 import { track, trigger } from "./effect";
-import { Reactive } from './reactive'
+import {reactive, Reactive, readonly} from './reactive'
 
 function createGetter (isReadonly = false) {
   return function (target, key) {
@@ -13,9 +13,18 @@ function createGetter (isReadonly = false) {
     const res = Reflect.get(target, key)
     // readonly不需要收集依赖
     !isReadonly && track(target, key)
+
+    if (isObject(res)) {
+      return isReadonly ? readonly(res) : reactive(res)
+    }
+
     // 返回读取结果
     return res
   }
+}
+
+function isObject (value) {
+  return typeof value === 'object' && value !== null
 }
 
 function createSetter () {

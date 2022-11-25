@@ -15,11 +15,20 @@
 
 > get陷阱函数不需要收集依赖
 
+
 #### isReadonly && isReactive
 
 ##### 描述
 
+> isReadonly：检查对象是不是Readonly；isReactive：检查对象是不是Reactive
+
 ##### 实现
+
+> 触发对象的get陷阱函数，对特殊的key进行处理
+
+
+#### reactive嵌套
+
 
 ### effect
 
@@ -28,12 +37,14 @@
  - 第一次执行fn时get、set的流程（收集依赖）
  - activeEffect的指向
 
+
 #### 关于依赖收集
 
  - 用来保存当前处于激活状态的effect
  - 因为effect中的fn会先被执行一次（执行fn的时候会触发响应时对象的get陷阱函数），且get陷阱函数中包含收集依赖的操作
  - `activeEffect = this`：在运行effect的run方法后且真正执行_fn之前，activeEffect被复制为当前执行的fn对应的effect
  - 因此在收集依赖时，可以通过 activeEffect 收集到当前fn对应的effect
+
 
 #### 遇到的问题
 
@@ -102,15 +113,18 @@ function reactive (raw) {
 }
 ```
 
+
 #### runner
 
 ##### 描述
 
-> 执行`effect`中的fn会返回一个函数（被称为runner），调用runner时会再次执行fn，并返回fn的返回值。
+> 执行`effect`中的fn会返回一个函数（被称为runner），调用runner时会再次执行fn，并返回fn的返回值。  
+>   以前有理解错误的地方，以为会需要收集依赖，实际上只需要重新执行fn  
 
 ##### 实现
 
  effect返回ReactiveEffect实例的run方法（this指向），run方法调用的时候返回fn的执行结果
+
 
 #### scheduler
 
@@ -124,6 +138,7 @@ function reactive (raw) {
 ##### 实现
 
  effect接收第二个参数（options），将options.scheduler添加到ReactiveEffect上，触发依赖时判断执行`run`和`scheduler`  
+
 
 #### stop
 
@@ -140,3 +155,21 @@ function reactive (raw) {
 ##### 实现遇到的问题
 
  - 1.activeEffect为空的问题，读取depsList时报错
+ 
+##### 优化
+
+> 当执行 target.key++ 的时候会执行get、set操作，已经stop的副作用函数在get的时候依赖会被重新收集  
+>   因此执行run方法时应该判断当前副作用是不是处于stop状态（active = false说明是stop状态，不需要收集依赖）。  
+
+
+
+## 响应式总结
+
+首先要说的是响应式核心的三个API reactive、ref、effect  
+reactive、ref的作用都是返回一个响应式代理，reactive针对引用类型，ref针对基本类型（引用类型也可以）  
+effect接收一个副作用函数，当这个副作用函数依赖的响应式对象发生变化的时候会重新调用这个副作用函数  
+
+### 文章流程
+
+ - 1.什么是副作用函数？什么是响应式数据？
+ - 2.WeakMap和Map（weakMap的键不能是对象，symbol也不可以）
