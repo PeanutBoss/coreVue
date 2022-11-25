@@ -75,10 +75,14 @@ it('stop', () => {
   expect(dummy).toBe(2)
   stop(runner)
 
-  obj.prop = 3
+  // obj.prop = 3
 
-  // obj.prop++
-  // obj.prop = obj.prop + 1  触发了get和set
+  /*
+  * obj.props++ 先触发get操作，已经stop的副作用函数可能会被重新收集依赖
+  * 所以在执行fn的时候不应该去收集依赖
+  * */
+  obj.prop++
+  // obj.prop = obj.prop + 1 // 触发了get和set
   /*
   * 执行fn的时候会执行响应式对象的get操作，会把依赖重新收集起来
   * 所以解决方法是执行fn的时候不让它重新收集依赖

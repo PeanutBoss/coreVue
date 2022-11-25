@@ -1,4 +1,11 @@
-import { extend } from '../share/index'
+import { extend } from '../share'
+
+// 暂存处于激活状态中的effect
+let activeEffect
+// 是否应该收集依赖，收集依赖的一个开关
+let shouldTrack = false
+// 保存所有对象的依赖
+const targetMap = new Map()
 
 class ReactiveEffect {
   private _fn: any
@@ -9,11 +16,17 @@ class ReactiveEffect {
     this._fn = fn
   }
   run () {
-    // 依赖被收集
-    this.active = true
-    // 用全局变量 activeEffect 保存当前的 effect 实例，收集依赖时使用
+    // 如果处于stop状态，直接执行fn且不收集依赖
+    if (!this.active) {
+      return this._fn()
+    }
     activeEffect = this
-    return this._fn()
+    // 否则，打开收集依赖的开关
+    shouldTrack = true
+    const result = this._fn()
+    // fn执行完毕后将开关关闭
+    shouldTrack = false
+    return result // 返回fn执行结果
   }
   stop () {
     // 如果依赖被删除，直接return
@@ -28,13 +41,10 @@ class ReactiveEffect {
   }
 }
 
-// 暂存处于激活状态中的effect
-let activeEffect
-// 保存所有对象的依赖
-const targetMap = new Map()
-
 // 收集依赖
 export function track (target, key) {
+  if (!isTracking()) return
+
   // 获取 target 对象对应的依赖，也是一个Map，这个Map保存着这个对象所有key的依赖
   let keyMap = targetMap.get(target)
   // 如果这个对象还没有对应的依赖，则创建并添加到 targetMap 中
@@ -52,14 +62,6 @@ export function track (target, key) {
   }
   // 将这个 effect 实例添加到这个 key 的依赖集合中
   deps.add(activeEffect)
-
-  /*
-  * 收集依赖时activeEffect可能为undefined
-  * 使用effect时会先执行一次传入的fn，执行fn之前会给activeEffect赋值为当前的依赖
-  *   然后才触发它的get拦截方法，收集依赖没有问题
-  * 但是直接做读取操作的时候，activeEffect就是undefined
-  * */
-  if (!activeEffect) return
 
   // 反向收集依赖集合（这个依赖项被哪些依赖集合收集）
   activeEffect.depsList.push(deps)
@@ -80,6 +82,21 @@ export function trigger (target, key) {
       effect.run()
     }
   }
+}
+
+// 是否需要收集依赖
+function isTracking () {
+  /*
+  * 收集依赖时activeEffect可能为undefined
+  * 使用effect时会先执行一次传入的fn，执行fn之前会给activeEffect赋值为当前的依赖
+  *   然后才触发它的get拦截方法，收集依赖没有问题
+  * 但是直接做读取操作的时候，activeEffect就是undefined
+  * */
+  // if (!activeEffect) return
+  // 如果是关闭状态就不收集依赖
+  // if (!shouldTrack) return
+
+  return shouldTrack && activeEffect !== undefined
 }
 
 // ---reactive--- 3.实现effect -> 4.收集依赖
