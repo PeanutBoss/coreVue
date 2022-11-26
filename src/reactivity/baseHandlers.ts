@@ -1,5 +1,6 @@
 import { track, trigger } from "./effect";
 import {reactive, Reactive, readonly} from './reactive'
+import { isObject } from '../share'
 
 function createGetter (isReadonly = false, isShallow = false) {
   return function (target, key) {
@@ -22,10 +23,6 @@ function createGetter (isReadonly = false, isShallow = false) {
     // 返回读取结果
     return res
   }
-}
-
-function isObject (value) {
-  return typeof value === 'object' && value !== null
 }
 
 function createSetter () {
