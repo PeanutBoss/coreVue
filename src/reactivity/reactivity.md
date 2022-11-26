@@ -36,9 +36,31 @@
 
 > shallowReadonly与readonly类似，区别在于shallowReadonly只会代理最外层的对象，不会做嵌套处理
 
-### isProxy
+#### isProxy
 
 > 只要是readonly或reactive，就是proxy
+
+
+
+### ref
+
+#### 描述
+
+> 与reactive类似，区别在于ref出现的目的是处理基本数据类型（也可以处理引用类型），调用ref返回响应式代理，通过value属性访问  
+
+#### 实现
+
+> 因为基本数据类型不能被代理，因此ref在调用后会返回一个Ref实例，Ref实例包含一个访问器属性 value，收集和触发依赖的动作
+>   在value的get和set执行时触发
+
+#### isRef
+
+> 接收一个对象判断该对象是否时ref的实例  
+>   ref实例上有特殊的key，通过判断是否存在这个key来确认是否是ref
+
+#### unRef
+
+> 返回一个ref的原始数据  
 
 
 
