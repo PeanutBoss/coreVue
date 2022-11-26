@@ -27,7 +27,19 @@
 > 触发对象的get陷阱函数，对特殊的key进行处理
 
 
-#### reactive嵌套
+#### reactive/readonly嵌套
+
+> reactive接受一个对象，这个对象的属性值也可能是一个对象，但reactive只对外层对象做了处理  
+> 需要在返回结果的时候进行判断，如果结果是对象，则需要用reactive进行包装；readonly同理
+
+#### shallowReadonly
+
+> shallowReadonly与readonly类似，区别在于shallowReadonly只会代理最外层的对象，不会做嵌套处理
+
+### isProxy
+
+> 只要是readonly或reactive，就是proxy
+
 
 
 ### effect

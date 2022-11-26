@@ -1,7 +1,7 @@
 import { track, trigger } from "./effect";
 import {reactive, Reactive, readonly} from './reactive'
 
-function createGetter (isReadonly = false) {
+function createGetter (isReadonly = false, isShallow = false) {
   return function (target, key) {
     if (key === Reactive.IS_REACTIVE) {
       return !isReadonly
@@ -14,7 +14,8 @@ function createGetter (isReadonly = false) {
     // readonly不需要收集依赖
     !isReadonly && track(target, key)
 
-    if (isObject(res)) {
+    // 如果读取结果是对象且不是shallow，需要做嵌套处理
+    if (isObject(res) && !isShallow) {
       return isReadonly ? readonly(res) : reactive(res)
     }
 
@@ -37,9 +38,15 @@ function createSetter () {
   }
 }
 
+function notSetter (target, key: any, value) {
+  console.warn(`${key} 是只读的`)
+  return true
+}
+
 const get = createGetter()
 const set = createSetter()
 const readonlyGet = createGetter(true)
+const shallowReadonlyGet = createGetter(true, true)
 
 // reactive的陷阱对象
 export const baseHandler = {
@@ -50,8 +57,10 @@ export const baseHandler = {
 // readonly的陷阱对象
 export const readonlyHandler = {
   get: readonlyGet,
-  set(target, key: any, value) {
-    console.warn(`${key} 是只读的`)
-    return true
-  }
+  set: notSetter
+}
+
+export const shallowReadonlyHandler = {
+  get: shallowReadonlyGet,
+  set: notSetter
 }

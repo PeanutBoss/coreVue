@@ -1,4 +1,4 @@
-import { baseHandler, readonlyHandler } from './baseHandlers'
+import { baseHandler, readonlyHandler, shallowReadonlyHandler } from './baseHandlers'
 
 // ---reactive--- 2.实现reactive -> effect
 export function reactive (raw) {
@@ -22,4 +22,13 @@ export function isReactive (target) {
 export function isReadOnly (target) {
   // 检测普通对象是会返回undefined，所以进行两次取反
   return !!target[Reactive.IS_READONLY]
+}
+
+// 只要是readonly或reactive，就是proxy
+export function isProxy (target) {
+  return isReadOnly(target) || isReactive(target)
+}
+
+export function shallowReadonly (raw) {
+  return new Proxy(raw, shallowReadonlyHandler)
 }
