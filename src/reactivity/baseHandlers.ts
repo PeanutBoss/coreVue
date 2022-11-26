@@ -1,5 +1,5 @@
 import { track, trigger } from "./effect";
-import {reactive, Reactive, readonly} from './reactive'
+import { reactive, Reactive, readonly } from './reactive'
 import { isObject } from '../share'
 
 function createGetter (isReadonly = false, isShallow = false) {

@@ -6,8 +6,10 @@ class Ref {
   private _value: any
   private depsList: any
   public __v_isRef = true
+  public _raw // 如果接收的是一个对象有用，用来保存原始值
   constructor(value) {
-    this._value = value
+    this._value = isObject(value) ? reactive(value) : value
+    this._raw = value
     this.depsList = new Set()
   }
   get value () {
@@ -15,21 +17,18 @@ class Ref {
     if (isTracking()) {
       trackEffect(this.depsList)
     }
-    if (isObject(this._value)) {
-      return reactive(this._value)
-    }
+    // if (isObject(this._value)) {
+    //   return reactive(this._value)
+    // }
     return this._value
   }
   set value (value) {
-    // 如果接收的值是一个对象
-    // if (isObject(value)) {
-    //   this._value = value
-    // }
-
     // 如果更新的值没有变化，则不执行操作（使用的时候可能有坑）
-    if (value === this._value) return
+    if (value === this._raw) return
+    value === 2 && console.log(value, this._value)
     // 应该先更新value，然后再触发依赖
-    this._value = value
+    this._value = isObject(value) ? reactive(value) : value
+    this._raw = value
     triggerEffect(this.depsList)
   }
 }
@@ -41,4 +40,31 @@ export function isRef (value) {
 
 export function ref (value) {
  return new Ref(value)
+}
+
+export function unRef (ref) {
+  if (isRef(ref)) return ref.value
+  return ref
+}
+
+export function proxyRef (ref) {
+  return new Proxy(
+    ref,
+    {
+      get(target, key) {
+        const res = Reflect.get(target, key)
+        if (isRef(res)) {
+          return res.value
+        }
+        return res
+      },
+      set (target, key, value) {
+        const res = Reflect.get(target, key)
+        if (isRef(res)) {
+          res.value = value
+        }
+        return Reflect.set(target, key, value)
+      }
+    }
+    )
 }
