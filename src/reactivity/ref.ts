@@ -52,16 +52,13 @@ export function proxyRef (ref) {
     ref,
     {
       get(target, key) {
-        const res = Reflect.get(target, key)
-        if (isRef(res)) {
-          return res.value
-        }
-        return res
+        const result = Reflect.get(target, key)
+        return unRef(result)
       },
       set (target, key, value) {
         const res = Reflect.get(target, key)
-        if (isRef(res)) {
-          res.value = value
+        if (isRef(res) && !isRef(value)) {
+          return res.value = value
         }
         return Reflect.set(target, key, value)
       }
