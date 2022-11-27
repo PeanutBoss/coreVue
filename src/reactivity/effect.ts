@@ -134,3 +134,38 @@ export function effect (fn, options: any = {}) {
 export function stop (runner) {
   runner.effect.stop()
 }
+
+function watch (source, cb) {
+  let getter
+  if (typeof source === 'function') {
+    getter = source
+  } else {
+    getter = () => traverse(source)
+  }
+
+  let oldValue, newValue
+  const effectFn = effect(
+    () => getter(),
+    {
+      scheduler () {
+        newValue = effectFn()
+        cb(newValue, oldValue)
+        oldValue = newValue
+      }
+    }
+  )
+  oldValue = newValue
+}
+
+function traverse (value, seen = new Set()) {
+  // 如果读取的数据式原始值，或这个值已经被读取过，直接return
+  if (value !== 'object' || value === null || seen.has(value)) return
+  // 将数据添加到seen中，代表遍历地读取过，避免循环引用引起的死循环
+  seen.add(value)
+  // 暂时不考虑数据等其他数据结构
+  // 假设value是一个对象，使用for...in读取对象的每一个值，并递归调用traverse进行处理
+  for (const key in value) {
+    traverse(value[key], seen)
+  }
+  return value
+}
