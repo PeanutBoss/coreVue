@@ -7,7 +7,7 @@ let shouldTrack = false
 // 保存所有对象的依赖
 const targetMap = new Map()
 
-class ReactiveEffect {
+export class ReactiveEffect {
   private _fn: any
   depsList: any = []
   private active = true // 是否需要删除依赖的标识

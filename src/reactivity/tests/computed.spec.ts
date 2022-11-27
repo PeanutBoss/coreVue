@@ -10,6 +10,7 @@ describe('computed', () => {
 
   it('should computed lazily', () => {
     const value = reactive({ foo: 1 })
+    // 不是使用effect，没有收集依赖
     const getter = jest.fn(() => value.foo)
     const cValue: any = computed(getter)
 
@@ -24,7 +25,7 @@ describe('computed', () => {
     cValue.value
     expect(getter).toHaveBeenCalledTimes(1)
 
-    // 更新getter依赖的值，重新调用一次
+    // 更新getter依赖的值，因为是懒执行的所以调用次数没变
     value.foo = 2
     expect(getter).toHaveBeenCalledTimes(1)
 
