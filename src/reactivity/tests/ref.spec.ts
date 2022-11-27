@@ -1,5 +1,5 @@
 import { effect } from "../effect";
-import { ref, isRef, unRef, proxyRef } from '../ref'
+import { ref, isRef, unRef, proxyRef, toRef, toRefs } from '../ref'
 import { reactive } from '../reactive'
 
 describe('ref', () => {
@@ -112,6 +112,23 @@ describe('ref', () => {
     proxyUser.age = ref(10)
     expect(proxyUser.age).toBe(10)
     expect(user.age.value).toBe(10)
+  })
+
+  it('toRef', () => {
+    const book = reactive({ name: '一日三秋', author: 'LZY' })
+    const name = toRef(book, 'name')
+    // const { author }: any = toRefs(book)
+
+    let bookName, bookAuthor
+    const runner = effect(() => {
+      bookName = name.value
+      // bookAuthor = author
+    })
+
+    book.name = '一地鸡毛'
+    // book.author = '刘'
+    expect(name.value).toBe('一地鸡毛')
+    // expect(bookAuthor).toBe('刘')
   })
 })
 

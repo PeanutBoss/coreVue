@@ -65,3 +65,24 @@ export function proxyRef (ref) {
     }
     )
 }
+
+export function toRef (target, key) {
+  const wrapper = {
+    get value () {
+      return target[key]
+    },
+    set value (value) {
+      target[key] = value
+    }
+  }
+  return wrapper
+}
+
+export function toRefs (target) {
+  const wrapper = {}
+  for (const key in target) {
+    console.log(key)
+    wrapper[key] = toRef(target, key)
+  }
+  return wrapper
+}
