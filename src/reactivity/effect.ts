@@ -9,8 +9,8 @@ const targetMap = new Map()
 
 export class ReactiveEffect {
   private _fn: any
-  depsList: any = []
-  private active = true // 是否需要删除依赖的标识
+  private active = true // 是否需要删除依赖的标识（stop功能点相关）
+  depsList: any = [] // 反向收集依赖（这个依赖被哪些key对应的依赖集合收集）
   onStop: any
   constructor(fn, public scheduler?) {
     this._fn = fn
@@ -60,11 +60,6 @@ export function track (target, key) {
     deps = new Set()
     keyMap.set(key, deps)
   }
-  // // 将这个 effect 实例添加到这个 key 的依赖集合中
-  // deps.add(activeEffect)
-  //
-  // // 反向收集依赖集合（这个依赖项被哪些依赖集合收集）
-  // activeEffect.depsList.push(deps)
   trackEffect(deps)
 }
 
@@ -83,15 +78,6 @@ export function trigger (target, key) {
   const keyMap = targetMap.get(target)
   // 获取target对象的 key 属性对应的依赖
   const deps = keyMap.get(key)
-  // // 触发所有依赖
-  // for (const effect of deps) {
-  //   // 如果有调度器方法则执行，否则直接执行run方法
-  //   if (effect.scheduler) {
-  //     effect.scheduler()
-  //   } else {
-  //     effect.run()
-  //   }
-  // }
   triggerEffect(deps)
 }
 
