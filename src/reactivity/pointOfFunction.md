@@ -1,4 +1,4 @@
-## 响应式
+## 功能点
 
 ### reactive
 
@@ -228,5 +228,7 @@ effect接收一个副作用函数，当这个副作用函数依赖的响应式�
 
 ### 文章流程
 
- - 1.什么是副作用函数？什么是响应式数据？
- - 2.WeakMap和Map（weakMap的键不能是对象，symbol也不可以）
+ - 前置知识
+    - 1.Proxy和Reflect
+    - 2.WeakMap和Map（weakMap的键只能是对象，symbol不可以）
+    - 3.什么是副作用函数？什么是响应式？
