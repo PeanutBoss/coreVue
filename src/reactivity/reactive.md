@@ -1,7 +1,5 @@
 ## 响应式篇
 
-~~我也想能与你搭起桥梁~~
-
 待解答问题  
  - ~~1.为什么使用Set保存key对应的依赖项~~
  - 2.为什么使用WeakMap结构收集所有对象和它的依赖，Map结构收集所有key和它的依赖
@@ -76,6 +74,7 @@ const obj = new Proxy(data, {
 })
 ```
 
+
 目前的响应式系统还存在很多的缺陷，比如直接通过名字 effect 来获取副作用函数，这种硬编码方式不灵活。副作用函数的名字可能不是effect，或者可能
 是一个匿名函数，因此必须要优化这种硬编码的机制。  
 
@@ -85,14 +84,21 @@ const obj = new Proxy(data, {
  - 当读取操作发生时，将副作用函数收集起来
  - 当设置操作发生时，将副作用函数取出并执行
 
-因此我们可以用一个全局变量存储被注册的副作用函数，effect用来注册副作用函数
+因此我们可以用一个全局变量存储被注册的副作用函数，而effect用来注册副作用函数
+
+#### 响应式系统核心工作流程
 
 ```javascript
-function effect (fn) {
-  activeEffect = fn
-  fn()
-}
+const obj = { name: '路飞', age: 16 }
+const proxy = reactive(obj)
+effect(() => {
+  document.write(`${obj.name}`)
+})
 ```
+
+使用reactive为原始对象创建一个响应式代理，副作用函数执行时会使用这个响应式代理  
+effect会作为整个系统的入口，给它传入一个副作用函数（fn），会将fn先执行一次来触发它的get操作，get操作被代理拦截，
+
 
 target-key-value对应关系
 
