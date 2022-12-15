@@ -13,7 +13,7 @@
  > 开始处理组件（应该先判断是组件还是html元素，这里只考虑组件）
 
  - processComponent
- > 开始处理组件  
+ > 开始处理组件
 
  - mountComponent
  > 创建组件实例
@@ -40,3 +40,31 @@
 
  - finishComponentSetup
  > 获取component，如果有render，调用render渲染
+
+### 初始化element主流程
+
+ - 创建App实例
+ > App实例就是一个对象，包含mount方法，该方法接收一个dom节点，将App实例挂载到这个dom节点上。  
+ > mount：将组件转为虚拟节点 -> 调用render函数渲染
+
+ - render
+ > 先对虚拟节点进行打补丁操作-patch
+
+ - patch
+ > 开始处理组件（应该先判断是组件还是html元素，这里只考虑组件）
+
+ - processElement
+ > 开始处理element
+
+ - mountElement
+   - 子节点是string类型
+   > 创建元素并上树
+   > - 创建元素
+   > - 添加属性和内容
+   > - 上树
+ 
+   - 子节点是array类型
+   > 
+
+ 
+ 
