@@ -35,7 +35,7 @@ function handleSetupResult(instance, setupResult) {
 function finishComponentSetup (instance) {
   const Component = instance.type
 
-  if (Component.render) {
-    instance.render = Component.render
-  }
+  // if (Component.render) {}
+  // 必须使用render函数，render一定是有值的
+  instance.render = Component.render
 }

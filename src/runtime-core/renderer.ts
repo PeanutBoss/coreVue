@@ -5,7 +5,9 @@ export function render (vNode, container) {
 }
 
 function patch (vNode, container) {
-  // TODO 判断组件类型做对应处理
+  // TODO 判断是组件类型还是普通标签
+  // processElement
+
   processComponent(vNode, container)
 }
 

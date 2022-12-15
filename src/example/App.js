@@ -1,3 +1,4 @@
+import { h } from '../../lib/guide-mini-vue-esm.js'
 export default {
   render () {
     return h('p', 'hello, ' + this.msg)
