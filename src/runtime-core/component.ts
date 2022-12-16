@@ -1,3 +1,4 @@
+import { PublicInstanceHandlers } from './componentPublicInstance'
 export function createComponentInstance (vNode) {
   const component = {
     vNode,
@@ -52,19 +53,7 @@ function finishComponentSetup (instance) {
   const Component = instance.type
 
   // 为实例添加render函数的时候改变render函数中的this指向
-  const proxy = new Proxy(
-    {},
-    {
-      get(target, key) {
-        if (key in instance.setupState) {
-          return instance.setupState[key]
-        }
-        if (key === '$el') {
-          console.log(instance)
-          return instance.vNode.el
-        }
-      }
-    })
+  const proxy = new Proxy({ instance }, PublicInstanceHandlers)
 
   // if (Component.render) {}
   // 必须使用render函数，render一定是有值的
