@@ -64,7 +64,20 @@
    > - 上树
  
    - 子节点是array类型
-   > 
+   > 创建元素
+   > 对每一个子节点都进行patch
+   > 这时的容器新创建的元素
+   > 上树
+   
+### 代理this
+> `this.msg`是在render函数执行时访问，改变render函数中的this指向为一个代理对象。
 
- 
- 
+### $el
+> 挂载元素的时候将创建的el添加到虚拟节点上；访问render函数的this（绑定的代理对象）时，通过拦截$el
+>   属性返回真实的DOM节点（存在一个问题，el是被添加到元素的虚拟节点上了，这时render函数的this是组件的虚拟节点）。
+>   解决这个问题需要在获取子节点树之后（真实DOM对应的虚拟节点），从子节点树上可以拿到这个组件对应的el。  
+> setupRenderEffect实际上就是将一个组件的虚拟节点处理为对应的element的虚拟节点。  
+
+#### 重构-componentPublicInstance
+ - PublicInstanceHandlers = proxy
+ - publicPropertiesMap = {}
