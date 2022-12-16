@@ -4,11 +4,11 @@ export default {
     return h(
       'p',
       { id: 'root' },
-      // 'hello, ' + this.msg
-      [
-        h('p', { class: 'aquamarine' }, 'hi'),
-        h('p', { class: 'aqua' }, 'mini-vue')
-      ]
+      'hello, ' + this.msg
+      // [
+      //   h('p', { class: 'aquamarine' }, 'hi'),
+      //   h('p', { class: 'aqua' }, 'mini-vue')
+      // ]
     )
   },
   setup () {
