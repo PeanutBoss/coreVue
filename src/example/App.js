@@ -1,6 +1,7 @@
 import { h } from '../../lib/guide-mini-vue-esm.js'
 export default {
   render () {
+    window.self = this
     return h(
       'p',
       { id: 'root' },

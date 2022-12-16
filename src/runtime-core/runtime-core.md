@@ -78,6 +78,9 @@
 >   解决这个问题需要在获取子节点树之后（真实DOM对应的虚拟节点），从子节点树上可以拿到这个组件对应的el。  
 > setupRenderEffect实际上就是将一个组件的虚拟节点处理为对应的element的虚拟节点。  
 
+_为组件实例绑定render函数时候改变render函数内this的指向（视频中是在调用实例的render函数时修改this指向）。_
+_看起来思路更清晰一些_  
+
 #### 重构-componentPublicInstance
  - PublicInstanceHandlers = proxy
  - publicPropertiesMap = {}

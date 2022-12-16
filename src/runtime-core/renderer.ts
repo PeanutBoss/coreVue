@@ -22,16 +22,20 @@ function mountComponent(vNode, container) {
   const instance = createComponentInstance(vNode)
 
   setupComponent(instance)
+  console.log(instance, 'setupComponent')
 
-  setupRenderEffect(instance, container)
+  setupRenderEffect(instance, vNode, container)
 }
 
-function setupRenderEffect(instance, container) {
+function setupRenderEffect(instance, vNode, container) {
   // 获取虚拟节点树
   const subTree = instance.render()
   // 基于虚拟节点，进一步调用patch
   // vNode -> element -> mountElement
+
   patch(subTree, container)
+
+  vNode.el = subTree.el
 }
 
 function processElement (vNode, container) {
@@ -46,7 +50,10 @@ function mountElement (vNode, container) {
 
   const el = document.createElement(vNode.type)
 
-  const { children, props } = vNode
+  // 将真实DOM添加到元素对应的虚拟DOM上
+  // console.log(vNode, '将el添加到html标签对应的虚拟DOM上了')
+  vNode.el = el
+
   mountChildren(vNode, el)
 
   patchProps(vNode, el)
