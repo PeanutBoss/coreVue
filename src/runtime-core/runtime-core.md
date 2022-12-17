@@ -84,3 +84,26 @@ _看起来思路更清晰一些_
 #### 重构-componentPublicInstance
  - PublicInstanceHandlers = proxy
  - publicPropertiesMap = {}
+
+### ShapeFlags
+**位运算**  
+```js
+// 下面是n1 n2的补码
+const n1 = '0000 0001'
+const n2 = '0000 0101'
+// |两位任何一位为1，那么结果为1
+// & 两位都为1，那么结果为1
+n1 | n2 = '0000 0101'
+n1 & n2 = '0000 0001'
+```
+
+**为虚拟节点添加shapeFlag属性，用来描述节点类型**  
+_使用位运算可以使用 0101 来标识节点同时属于哪个类型_  
+
+ - ELEMENT 1
+ - STATEFUL_COMPONENT 1 << 1
+ - TEXT_CHILDREN 1 << 2
+ - ARRAY_CHILDREN 1 << 3
+
+> 为vNode添加shapeFlag属性，标识当前节点是什么类型。  
+> getShapeFlag判断当前vNode是不是组件类型，还需要通过children来判断子节点的类型
