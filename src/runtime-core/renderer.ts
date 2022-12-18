@@ -7,11 +7,8 @@ export function render (vNode, container) {
 
 function patch (vNode, container) {
   // TODO 判断是组件类型还是普通标签
-
-  // if (typeof vNode.type === 'string') {
   if (vNode.shapeFlag & ShapeFlags.ELEMENT) {
     processElement(vNode, container)
-  // } else if (typeof vNode.type === 'object') {
   } else if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     processComponent(vNode, container)
   }
@@ -66,10 +63,8 @@ function mountElement (vNode, container) {
 
 function mountChildren (vNode, container) {
   // 处理内容
-  // if (typeof vNode.children === 'string') {
   if (vNode.shapeFlag & ShapeFlags.TEXT_CHILDREN) {
     container.textContent = vNode.children
-  // } else if (Array.isArray(vNode.children)) {
   } else if (vNode.shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
     vNode.children.forEach(child => patch(child, container))
   }

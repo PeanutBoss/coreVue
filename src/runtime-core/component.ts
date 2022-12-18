@@ -1,4 +1,5 @@
 import { PublicInstanceHandlers } from './componentPublicInstance'
+import {shallowReadonly} from "../reactivity/reactive";
 export function createComponentInstance (vNode) {
   const component = {
     vNode,
@@ -9,7 +10,7 @@ export function createComponentInstance (vNode) {
 }
 
 export function setupComponent (instance) {
-  // initProps()
+  initProps(instance, instance.vNode.props)
   // initSlots()
   setupStateComponent(instance)
 }
@@ -25,6 +26,10 @@ function setupStateComponent(instance) {
   }
 }
 
+function initProps (instance, rawProps) {
+  console.log(rawProps, 'rawProps')
+  instance.props = rawProps
+}
 
 // TODO typeof setupResult function/object
 function handleSetupResult(instance, setupResult) {

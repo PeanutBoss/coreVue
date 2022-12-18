@@ -1,5 +1,14 @@
 import { h } from '../../lib/guide-mini-vue-esm.js'
+
+const Child = {
+  setup () {},
+  render() {
+    return h('div', {}, 'count = ' + this.count)
+  }
+}
+
 export default {
+  name: 'App',
   render () {
     window.self = this
     return h(
@@ -10,7 +19,10 @@ export default {
           console.log('click')
         }
       },
-      'hello, ' + this.msg
+      [
+        h('div', {}, 'hello, ' + this.msg),
+        h(Child, { count: 10 })
+      ]
       // [
       //   h('p', { class: 'aquamarine' }, 'hi'),
       //   h('p', { class: 'aqua' }, 'mini-vue')

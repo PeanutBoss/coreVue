@@ -3,7 +3,7 @@ import {ShapeFlags} from './shapeFlags'
 export function createVNode (type, props?, children?) {
   const vNode: any = {
     type,
-    props,
+    props: props || {},
     children,
     shapeFlag: getShapeFlag(type), // 初始化子节点标识：是组件还是元素
   }
