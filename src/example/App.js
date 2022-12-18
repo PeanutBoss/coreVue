@@ -1,7 +1,9 @@
 import { h } from '../../lib/guide-mini-vue-esm.js'
 
 const Child = {
-  setup () {},
+  setup (props) {
+    props.count++
+  },
   render() {
     return h('div', {}, 'count = ' + this.count)
   }

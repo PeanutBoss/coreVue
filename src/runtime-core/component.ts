@@ -21,14 +21,14 @@ function setupStateComponent(instance) {
 
   const { setup } = Component
   if (setup) {
-    const setupResult = setup()
+    const setupResult = setup(instance.props)
     handleSetupResult(instance, setupResult)
   }
 }
 
 function initProps (instance, rawProps) {
   console.log(rawProps, 'rawProps')
-  instance.props = rawProps
+  instance.props = shallowReadonly(rawProps)
 }
 
 // TODO typeof setupResult function/object
