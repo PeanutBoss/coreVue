@@ -25,7 +25,6 @@ function mountComponent(vNode, container) {
   const instance = createComponentInstance(vNode)
 
   setupComponent(instance)
-  console.log(instance, 'setupComponent')
 
   setupRenderEffect(instance, vNode, container)
 }
@@ -59,7 +58,7 @@ function mountElement (vNode, container) {
 
   mountChildren(vNode, el)
 
-  patchProps(vNode, el)
+  processProps(vNode, el)
 
   // 上树
   container.append(el)
@@ -76,11 +75,16 @@ function mountChildren (vNode, container) {
   }
 }
 
-function patchProps (vNode, container) {
-
+function processProps (vNode, container) {
   // 处理属性
   for (const key in vNode.props) {
     const val = vNode.props[key]
-    container.setAttribute(key, val)
+    // 如果prop的key以 on+首字母大写开头，那么就认为是绑定一个事件
+    if (/^on[A-Z]/.test(key)) {
+      const eventName = key.slice(2).toLowerCase()
+      container.addEventListener(eventName, val)
+    } else {
+      container.setAttribute(key, val)
+    }
   }
 }

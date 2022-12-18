@@ -107,3 +107,9 @@ _使用位运算可以使用 0101 来标识节点同时属于哪个类型_
 
 > 为vNode添加shapeFlag属性，标识当前节点是什么类型。  
 > getShapeFlag判断当前vNode是不是组件类型，还需要通过children来判断子节点的类型
+
+### 事件绑定
+
+### 实现组件props
+ - props作为setup方法的参数
+ - shallowReadonly

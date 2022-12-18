@@ -4,7 +4,12 @@ export default {
     window.self = this
     return h(
       'p',
-      { id: 'root' },
+      {
+        id: 'root',
+        onClick: () => {
+          console.log('click')
+        }
+      },
       'hello, ' + this.msg
       // [
       //   h('p', { class: 'aquamarine' }, 'hi'),

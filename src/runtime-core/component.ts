@@ -18,20 +18,6 @@ function setupStateComponent(instance) {
   // 组件的options
   const Component = instance.type
 
-  // Component.proxy = new Proxy(
-  //   {},
-  //   {
-  //     get(target, key) {
-  //       if (key in instance.setupState) {
-  //         return instance.setupState[key]
-  //       }
-  //       if (key === '$el') {
-  //         console.log(instance)
-  //         return instance.vNode.el
-  //       }
-  //     }
-  //   })
-
   const { setup } = Component
   if (setup) {
     const setupResult = setup()
