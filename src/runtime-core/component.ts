@@ -1,11 +1,14 @@
 import { PublicInstanceHandlers } from './componentPublicInstance'
 import {shallowReadonly} from "../reactivity/reactive";
+import { emit } from "./emit";
 export function createComponentInstance (vNode) {
-  const component = {
+  const component: any = {
     vNode,
     type: vNode.type,
-    setupState: {}
+    setupState: {},
+    emit: null
   }
+  component.emit = emit.bind(null, component)
   return component
 }
 
@@ -21,7 +24,7 @@ function setupStateComponent(instance) {
 
   const { setup } = Component
   if (setup) {
-    const setupResult = setup(instance.props)
+    const setupResult = setup(instance.props, instance)
     handleSetupResult(instance, setupResult)
   }
 }

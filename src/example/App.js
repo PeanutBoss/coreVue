@@ -1,24 +1,30 @@
 import { h } from '../../lib/guide-mini-vue-esm.js'
 
 const Child = {
-  setup (props) {
+  setup (props, { emit }) {
     // props.count++
     const emitAdd = (e) => {
       e.stopPropagation()
-      console.log('emit add')
-      emit('add')
+      emit('add', 'a', 'b', 'c')
+    }
+    const emitChange = (e) => {
+      e.stopPropagation()
+      emit('change', 1, 2, 3)
     }
     return {
-      emitAdd
+      emitAdd,
+      emitChange
     }
   },
   render() {
     const btn = h('button', {
       onClick: this.emitAdd
     }, 'add')
+    const change = h('button', {
+      onClick: this.emitChange
+    }, 'change')
     const foo = h('div', {}, 'count = ' + this.count)
-    return h('div', {}, [foo, btn])
-
+    return h('div', {}, [foo, btn, change])
   }
 }
 
@@ -38,8 +44,11 @@ export default {
         h('div', {}, 'hello, ' + this.msg),
         h(Child, {
           count: 10,
-          onAdd () {
-            console.log('onAdd触发')
+          onChange (a, b, c) {
+            console.log('触发change事件', a, b, c)
+          },
+          onAdd (a, b, c) {
+            console.log('onAdd触发', a, b, c)
           }
         })
       ]
