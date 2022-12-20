@@ -33,7 +33,8 @@ const SlotComp = {
   render() {
     const foo = h('div', {}, 'slotComp')
     // return h('div', {}, this.$slots)
-    return h('div', {}, [foo, renderSlots(this.$slots)])
+    // return h('div', {}, [foo, renderSlots(this.$slots)])
+    return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
     // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
   }
 }
@@ -61,7 +62,14 @@ export default {
         //     console.log('onAdd触发', a, b, c)
         //   }
         // }, h('p'))
-        h(SlotComp, {}, '插槽渲染出来的内容')
+        h(
+          SlotComp,
+          {},
+          {
+            header: h('p', {}, 'header'),
+            footer: h('p', {}, 'footer')
+          }
+        )
       ]
       // [
       //   h('p', { class: 'aquamarine' }, 'hi'),

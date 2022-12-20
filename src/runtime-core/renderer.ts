@@ -85,6 +85,8 @@ function processProps (vNode, container) {
   }
 }
 
-export function renderSlots (slots) {
-  return createVNode('div', {}, slots)
+export function renderSlots (slots, name) {
+  return slots[name]
+  // return createVNode('div', {}, slots[name])
+  // return createVNode('div', {}, slots)
 }

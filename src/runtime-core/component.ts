@@ -37,6 +37,11 @@ function initProps (instance, rawProps) {
 }
 
 function initSlots (instance, slots) {
+  // instance.slots = slots
+  const newSlots = {}
+  for (const key in slots) {
+    newSlots[key] = slots[key]
+  }
   instance.slots = slots
 }
 
