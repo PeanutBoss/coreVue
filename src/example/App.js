@@ -28,6 +28,15 @@ const Child = {
   }
 }
 
+const SlotComp = {
+  setup () {},
+  render() {
+    const foo = h('div', {}, 'slotComp')
+    return h('div', {}, [foo])
+    // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+  }
+}
+
 export default {
   name: 'App',
   render () {
@@ -42,15 +51,16 @@ export default {
       },
       [
         h('div', {}, 'hello, ' + this.msg),
-        h(Child, {
-          count: 10,
-          onChange (a, b, c) {
-            console.log('触发change事件', a, b, c)
-          },
-          onAdd (a, b, c) {
-            console.log('onAdd触发', a, b, c)
-          }
-        })
+        // h(Child, {
+        //   count: 10,
+        //   onChange (a, b, c) {
+        //     console.log('触发change事件', a, b, c)
+        //   },
+        //   onAdd (a, b, c) {
+        //     console.log('onAdd触发', a, b, c)
+        //   }
+        // }, h('p'))
+        h(SlotComp, {}, '插槽渲染出来的内容')
       ]
       // [
       //   h('p', { class: 'aquamarine' }, 'hi'),
