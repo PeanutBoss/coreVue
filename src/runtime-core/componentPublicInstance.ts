@@ -1,5 +1,6 @@
 const publicPropertiesMap = {
-    '$el': instance => instance.vNode.el
+    '$el': instance => instance.vNode.el,
+    '$slots': instance => instance.slots
 }
 
 export const PublicInstanceHandlers = {

@@ -1,5 +1,6 @@
 import { createComponentInstance, setupComponent } from "./component";
 import { ShapeFlags } from './shapeFlags'
+import {createVNode} from "./vNode";
 
 export function render (vNode, container) {
   patch(vNode, container)
@@ -82,4 +83,8 @@ function processProps (vNode, container) {
       container.setAttribute(key, val)
     }
   }
+}
+
+export function renderSlots (slots) {
+  return createVNode('div', {}, slots)
 }

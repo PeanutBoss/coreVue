@@ -1,4 +1,4 @@
-import { h } from '../../lib/guide-mini-vue-esm.js'
+import { h, renderSlots } from '../../lib/guide-mini-vue-esm.js'
 
 const Child = {
   setup (props, { emit }) {
@@ -32,7 +32,8 @@ const SlotComp = {
   setup () {},
   render() {
     const foo = h('div', {}, 'slotComp')
-    return h('div', {}, [foo])
+    // return h('div', {}, this.$slots)
+    return h('div', {}, [foo, renderSlots(this.$slots)])
     // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
   }
 }

@@ -6,6 +6,8 @@ export function createComponentInstance (vNode) {
     vNode,
     type: vNode.type,
     setupState: {},
+    slots: {},
+    props: {},
     emit: null
   }
   component.emit = emit.bind(null, component)
@@ -14,7 +16,7 @@ export function createComponentInstance (vNode) {
 
 export function setupComponent (instance) {
   initProps(instance, instance.vNode.props)
-  // initSlots()
+  initSlots(instance, instance.vNode.children)
   setupStateComponent(instance)
 }
 
@@ -32,6 +34,10 @@ function setupStateComponent(instance) {
 function initProps (instance, rawProps) {
   console.log(rawProps, 'rawProps')
   instance.props = shallowReadonly(rawProps)
+}
+
+function initSlots (instance, slots) {
+  instance.slots = slots
 }
 
 // TODO typeof setupResult function/object
