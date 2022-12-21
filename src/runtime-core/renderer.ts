@@ -85,9 +85,11 @@ function processProps (vNode, container) {
   }
 }
 
-export function renderSlots (slots) {
+export function renderSlots (slots, name) {
   // 1/2 实现
-  return createVNode('div', {}, slots)
-  // return createVNode('div', {}, slots[name])
   // return createVNode('div', {}, slots)
+  // 3.具名插槽
+  const slot = slots[name]
+  console.log(slot, 'slot')
+  if (slot) return createVNode('div', {}, slot)
 }

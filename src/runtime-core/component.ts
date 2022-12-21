@@ -32,11 +32,12 @@ function setupStateComponent(instance) {
 }
 
 function initSlots (instance, children) {
-  instance.slots = Array.isArray(children) ? children : [children]
-  // const slots = {}
-  // for (const key in children) {
-  //   slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
-  // }
+  // instance.slots = Array.isArray(children) ? children : [children]
+  const slots = {}
+  for (const key in children) {
+    slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+  }
+  instance.slots = slots
 }
 
 
