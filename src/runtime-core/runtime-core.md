@@ -172,6 +172,7 @@ function initSlots (instance, children) {
         * 所以要再将其包装为函数
         * */
         const value = children[key]
+        // 这段代码在渲染的时候才会执行，渲染时接收到props，最后执行操作返回vNode
         slots[key] = props => Array.isArray(value(props)) ? value(props) : [value(props)]
     }
 }
