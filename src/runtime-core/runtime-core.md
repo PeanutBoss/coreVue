@@ -250,7 +250,7 @@ const App = {
 }
 ```
 
-### 优化
+#### 优化
 > 因为不是所有的children都需要作为插槽处理，只有当虚拟节点满足 组件类型 和组件的children为 object 时才需要处理  
 > 所以在处理组件的children时为组件加上插槽类型的ShapeFlag  
 > 创建节点时判断
@@ -261,3 +261,23 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     }
   }
 ```
+
+### Fragment&Text节点类型
+> 在处理插槽的时候，renderSlots拿到是虚拟节点数组，render函数不能直接处理，所以需要使用div将其包裹。  
+> 于是renderSlots多渲染了一个div标签，使页面结构与代码不一致。  
+> 由此引出Fragment节点类型和Text节点类型  
+> Fragment -> 只渲染children  
+> Text -> 直接渲染文本，不是vNode
+
+#### 解析
+ - Fragment
+  > 在patch方法中，目前有区分 element 和 component 类型的节点，而现在需要再新增一个Fragment类型，
+  > Fragment类型只渲染vNode的children。  
+  > 在渲染插槽的时候，不再用 div 包裹，而是使用Fragment(Symbol) -> processFragment -> 直接mountChildren
+
+ - Text
+  > 比如 `header: ({ age }) => [h('p', {}, 'header' + age, '你好呀'])`要渲染两个节点，有一个节点是文本不是vNode  
+  > createTextVNode：返回一个特殊的vNode，type是Text  
+  > patch新增processText -> 创建文本节点并添加到容器上  
+  > 给vNode添加真实节点el属性
+

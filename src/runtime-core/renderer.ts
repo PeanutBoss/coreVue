@@ -90,5 +90,6 @@ export function renderSlots (slots, name, props = {}) {
   // return createVNode('div', {}, slots)
   // 3.具名插槽
   const slot = slots[name]
+  console.log(slot(props), 'slot(props)slot(props)slot(props)')
   if (slot) return createVNode('div', {}, slot(props))
 }
