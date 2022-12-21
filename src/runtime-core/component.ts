@@ -1,6 +1,7 @@
 import { PublicInstanceHandlers } from './componentPublicInstance'
 import {shallowReadonly} from "../reactivity/reactive";
 import { emit } from "./emit";
+import {ShapeFlags} from "./shapeFlags";
 export function createComponentInstance (vNode) {
   const component: any = {
     vNode,
@@ -38,13 +39,17 @@ function initSlots (instance, children) {
   // for (const key in children) {
   //   slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
   // }
-  // 4.作用域插槽
-  const slots = {}
-  for (const key in children) {
-    const value = children[key]
-    slots[key] = props => Array.isArray(value(props)) ? value(props) : [value(props)]
+  const { vNode } = instance
+  console.log(vNode, 'vNode')
+  if (vNode.shapeFlag & ShapeFlags.SLOT_CHILDREN) {
+    // 4.作用域插槽
+    const slots = {}
+    for (const key in children) {
+      const value = children[key]
+      slots[key] = props => Array.isArray(value(props)) ? value(props) : [value(props)]
+    }
+    instance.slots = slots
   }
-  instance.slots = slots
 }
 
 

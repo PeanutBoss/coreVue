@@ -248,3 +248,15 @@ const App = {
   }
 }
 ```
+
+### 优化
+> 因为不是所有的children都需要作为插槽处理，只有当虚拟节点满足 组件类型 和组件的children为 object 时才需要处理  
+> 所以在处理组件的children时为组件加上插槽类型的ShapeFlag  
+> 创建节点时判断
+```js
+if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+    if (typeof vNode.children === 'object') {
+      vNode.shapeFlag = ShapeFlags.SLOT_CHILDREN
+    }
+  }
+```
