@@ -149,22 +149,47 @@ function initSlots (instance, children) {
     // instance.slots = Array.isArray(children) ? children : [children]
 
     // 3.实现具名插槽
+    // const slots = {}
+    // for (const key in children) {
+    //     // 如果子节点不是数组就转为数组
+    //     slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+    // }
+    
+    // 4.实现作用域插槽
     const slots = {}
     for (const key in children) {
-        // 如果子节点不是数组就转为数组
-        slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+        /*
+        * 实现具名插槽的时候，这里的value就已经是一个虚拟节点了
+        * 但是在实现作用域插槽的时候，value在这里是一个函数，如`({age}) => h('div', {}, 'header' + age)`
+        * 需要调用一次才能获取到虚拟节点
+        * */
+        // const value = children[key]
+        // const vNode = value()
+        // slots[key] = Array.isArray(vNode) ? vNode : [vNode]
+
+        /*
+        * 因为在最后渲染的时候需要依赖props，`return createVNode('div', {}, slot(props))`
+        * 所以要再将其包装为函数
+        * */
+        const value = children[key]
+        slots[key] = props => Array.isArray(value(props)) ? value(props) : [value(props)]
     }
 }
 
-function renderSlots (slots) {
+function renderSlots (slots, name, props) {
     // 1/2.实现插槽内容为单个虚拟节点或一组虚拟节点
-    return createVNode('div', {}, slots)
-    // 具名插槽
+    // return createVNode('div', {}, slots)
+    // 3.具名插槽
+    const slot = slots[name]
+    // if (slot) return createVNode('div', {}, slot)
+    // 4.作用域插槽
+    if (slot) return createVNode('div', {}, slot(props))
 }
 
 const SlotComp = {
     setup () {},
     render() {
+        const age = 20
         const foo = h('div', {}, 'slotComp')
         // 1.render函数不能直接处理数组类型的子节点，需要将其转为vNode
         return h('div', {}, [foo, h('div', {}, this.$slots)])
@@ -174,8 +199,14 @@ const SlotComp = {
         // 初始化插槽的时候（给实例添加插槽的时候），判断children是不是数组类型，如果不是则包装成数组
 
         // 3.实现具名插槽
-        return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
         // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+        
+        // 4.实现具名插槽
+        return h('div', {}, [
+            renderSlots(this.$slots, 'header', { age }),
+            foo,
+            renderSlots(this.$slots, 'footer')
+        ])
     }
 }
 
@@ -196,9 +227,15 @@ const App = {
           // [h('p', {}, '123'), h('p', {}, '456')]
 
           // 3.具名插槽
+          // {
+          //   header: h('p', {}, 'header'),
+          //   footer: h('p', {}, 'footer')
+          // }
+
+          // 4.作用域插槽
           {
-            header: h('p', {}, 'header'),
-            footer: h('p', {}, 'footer')
+              header: ({ age }) => h('p', {}, 'header' + age),
+              footer: () => h('p', {}, 'footer')
           }
         )
       ]

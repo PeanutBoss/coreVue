@@ -33,9 +33,16 @@ function setupStateComponent(instance) {
 
 function initSlots (instance, children) {
   // instance.slots = Array.isArray(children) ? children : [children]
+  // 3.具名插槽
+  // const slots = {}
+  // for (const key in children) {
+  //   slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+  // }
+  // 4.作用域插槽
   const slots = {}
   for (const key in children) {
-    slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+    const value = children[key]
+    slots[key] = props => Array.isArray(value(props)) ? value(props) : [value(props)]
   }
   instance.slots = slots
 }

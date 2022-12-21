@@ -31,11 +31,18 @@ const Child = {
 const SlotComp = {
   setup () {},
   render() {
+    const age = 22
     const foo = h('div', {}, 'slotComp')
     // return h('div', {}, [foo, h('div', {}, this.$slots)])
     // return h('div', {}, [foo, renderSlots(this.$slots)])
-    return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+    // 3.具名插槽
     // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+    // 4.作用域插槽
+    return h('div', {}, [
+      renderSlots(this.$slots, 'header', { age }),
+      foo,
+      renderSlots(this.$slots, 'footer')
+    ])
   }
 }
 
@@ -59,9 +66,14 @@ export default {
             // h('p', {}, '123')
             // [h('p', {}, '123'), h('p', {}, '456')]
             // 3.具名插槽
+          // {
+          //   header: h('p', {}, 'header'),
+          //   footer: h('p', {}, 'footer')
+          // }
+          // 4.作用域插槽
           {
-            header: h('p', {}, 'header'),
-            footer: h('p', {}, 'footer')
+            header: ({ age }) =>  h('p', {}, 'header' + age),
+            footer: () => h('p', {}, 'footer')
           }
         )
       ]
