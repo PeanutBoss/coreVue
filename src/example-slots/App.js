@@ -32,8 +32,8 @@ const SlotComp = {
   setup () {},
   render() {
     const foo = h('div', {}, 'slotComp')
-    return h('div', {}, [foo, this.$slots])
-    // return h('div', {}, [foo, renderSlots(this.$slots)])
+    // return h('div', {}, [foo, h('div', {}, this.$slots)])
+    return h('div', {}, [foo, renderSlots(this.$slots)])
     // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
     // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
   }
@@ -53,20 +53,17 @@ export default {
       },
       [
         h('div', {}, 'hello, ' + this.msg),
-        h(Child, {
-          count: 10,
-          onChange (a, b, c) {
-            console.log('触发change事件', a, b, c)
-          },
-          onAdd (a, b, c) {
-            console.log('onAdd触发', a, b, c)
-          }
-        }, h('p'))
+        h(
+          SlotComp,
+          {},
+            // h('p', {}, '123')
+            [h('p', {}, '123'), h('p', {}, '456')]
+          // {
+          //   header: h('p', {}, 'header'),
+          //   footer: h('p', {}, 'footer')
+          // }
+        )
       ]
-      // [
-      //   h('p', { class: 'aquamarine' }, 'hi'),
-      //   h('p', { class: 'aqua' }, 'mini-vue')
-      // ]
     )
   },
   setup () {

@@ -31,20 +31,19 @@ function setupStateComponent(instance) {
   }
 }
 
+function initSlots (instance, children) {
+  instance.slots = Array.isArray(children) ? children : [children]
+  // const slots = {}
+  // for (const key in children) {
+  //   slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+  // }
+}
+
+
 function initProps (instance, rawProps) {
   console.log(rawProps, 'rawProps')
   instance.props = shallowReadonly(rawProps)
 }
-
-function initSlots (instance, slots) {
-  // instance.slots = slots
-  const newSlots = {}
-  for (const key in slots) {
-    newSlots[key] = slots[key]
-  }
-  instance.slots = slots
-}
-
 // TODO typeof setupResult function/object
 function handleSetupResult(instance, setupResult) {
   if (typeof setupResult === 'object') {

@@ -140,3 +140,74 @@ _使用位运算可以使用 0101 来标识节点同时属于哪个类型_
 > 将插槽改为函数形式，props作为参数传递  
 > 一共有两层调用，第一次初始化slots，为slots添加要渲染的元素时要调用函数（调用函数返回的是拿到数据的h函数）  
 > 因为在渲染slots时还会调用slot，所以在上一步需要将其封装为函数（调用函数返回的是具体的虚拟节点）  
+
+#### 代码
+```js
+// 获取组件的插槽实际上就是获取组件的children
+function initSlots (instance, children) {
+    // instance.slots = children
+    // instance.slots = Array.isArray(children) ? children : [children]
+
+    // 3.实现具名插槽
+    const slots = {}
+    for (const key in children) {
+        // 如果子节点不是数组就转为数组
+        slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
+    }
+}
+
+function renderSlots (slots) {
+    // 1/2.实现插槽内容为单个虚拟节点或一组虚拟节点
+    return createVNode('div', {}, slots)
+    // 具名插槽
+}
+
+const SlotComp = {
+    setup () {},
+    render() {
+        const foo = h('div', {}, 'slotComp')
+        // 1.render函数不能直接处理数组类型的子节点，需要将其转为vNode
+        return h('div', {}, [foo, h('div', {}, this.$slots)])
+        return h('div', {}, [foo, renderSlots(this.$slots)])
+
+        // 2.上面做法实现后，又不支持单个vNode类型的子节点了
+        // 初始化插槽的时候（给实例添加插槽的时候），判断children是不是数组类型，如果不是则包装成数组
+
+        // 3.实现具名插槽
+        return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+        // return h('div', {}, [renderSlots(this.$slots, 'header'), foo, renderSlots(this.$slots, 'footer')])
+    }
+}
+
+const App = {
+  name: 'App',
+  render () {
+    window.self = this
+    return h(
+      'p',
+      { id: 'root' },
+      [
+        h('div', {}, 'hello, ' + this.msg),
+        h(
+          SlotComp,
+          {},
+          // 1/2.插槽中可以包含多个子节点[]vNode或一个子节点vNode
+          // h('p', {}, '123')
+          // [h('p', {}, '123'), h('p', {}, '456')]
+
+          // 3.具名插槽
+          {
+            header: h('p', {}, 'header'),
+            footer: h('p', {}, 'footer')
+          }
+        )
+      ]
+    )
+  },
+  setup () {
+    return {
+      msg: 'mini-vue'
+    }
+  }
+}
+```
