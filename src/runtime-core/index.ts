@@ -3,3 +3,4 @@
 export { createApp } from './createApp'
 export { h } from './h'
 export { renderSlots } from './renderer'
+export { createTextVNode } from './vNode'

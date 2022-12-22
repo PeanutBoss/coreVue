@@ -12,6 +12,9 @@ function patch (vNode, container) {
     case Fragment:
       processFragment(vNode, container)
       break
+    case Text:
+      processText(vNode, container)
+      break
     default:
       if (vNode.shapeFlag & ShapeFlags.ELEMENT) {
         processElement(vNode, container)
@@ -94,6 +97,12 @@ function processProps (vNode, container) {
 
 function processFragment (vNode, container) {
   mountChildren(vNode, container)
+}
+
+function processText (vNode, container) {
+  const { children } = vNode
+  vNode.el = document.createTextNode(children)
+  container.append(vNode.el)
 }
 
 export function renderSlots (slots, name, props = {}) {

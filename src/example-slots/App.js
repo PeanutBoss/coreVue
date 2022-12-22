@@ -1,4 +1,4 @@
-import { h, renderSlots } from '../../lib/guide-mini-vue-esm.js'
+import { h, renderSlots, createTextVNode } from '../../lib/guide-mini-vue-esm.js'
 
 const Child = {
   setup (props, { emit }) {
@@ -72,7 +72,7 @@ export default {
           // }
           // 4.作用域插槽
           {
-            header: ({ age }) =>  [h('p', {}, 'header' + age)],
+            header: ({ age }) =>  [h('p', {}, 'header' + age), createTextVNode('这是一段文本')],
             footer: () => h('p', {}, 'footer')
           }
         )

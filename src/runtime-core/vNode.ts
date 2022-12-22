@@ -23,3 +23,7 @@ export function createVNode (type, props?, children?) {
 }
 
 const getShapeFlag = (type) => typeof type === 'string' ? ShapeFlags.ELEMENT : ShapeFlags.STATEFUL_COMPONENT
+
+export function createTextVNode (text) {
+  return createVNode(Text, {}, text)
+}
