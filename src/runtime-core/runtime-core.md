@@ -281,3 +281,7 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
   > patch新增processText -> 创建文本节点并添加到容器上  
   > 给vNode添加真实节点el属性
 
+### getCurrentInstance
+> 通过一个全局变量保存instance，在调用组件的setup方法时更新全局变量。  
+> 因此getCurrentInstance只能在setup中使用。
+
