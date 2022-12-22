@@ -72,7 +72,7 @@ export default {
           // }
           // 4.作用域插槽
           {
-            header: ({ age }) =>  h('p', {}, 'header' + age),
+            header: ({ age }) =>  [h('p', {}, 'header' + age)],
             footer: () => h('p', {}, 'footer')
           }
         )

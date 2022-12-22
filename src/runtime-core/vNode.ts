@@ -1,4 +1,4 @@
-import {ShapeFlags} from './shapeFlags'
+import { ShapeFlags } from './shapeFlags'
 
 export function createVNode (type, props?, children?) {
   const vNode: any = {
