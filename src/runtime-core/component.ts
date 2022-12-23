@@ -27,7 +27,9 @@ function setupStateComponent(instance) {
 
   const { setup } = Component
   if (setup) {
+    setCurrentInstance(instance)
     const setupResult = setup(instance.props, instance)
+    setCurrentInstance(null)
     handleSetupResult(instance, setupResult)
   }
 }
@@ -40,7 +42,7 @@ function initSlots (instance, children) {
   //   slots[key] = Array.isArray(children[key]) ? children[key] : [children[key]]
   // }
   const { vNode } = instance
-  console.log(vNode, 'vNode')
+  // console.log(vNode, 'vNode')
   if (vNode.shapeFlag & ShapeFlags.SLOT_CHILDREN) {
     // 4.作用域插槽
     const slots = {}
@@ -54,7 +56,7 @@ function initSlots (instance, children) {
 
 
 function initProps (instance, rawProps) {
-  console.log(rawProps, 'rawProps')
+  // console.log(rawProps, 'rawProps')
   instance.props = shallowReadonly(rawProps)
 }
 // TODO typeof setupResult function/object
@@ -75,4 +77,12 @@ function finishComponentSetup (instance) {
   // if (Component.render) {}
   // 必须使用render函数，render一定是有值的
   instance.render = Component.render.bind(proxy)
+}
+
+let currentInstance = null
+function setCurrentInstance (instance) {
+  currentInstance = instance
+}
+export function getCurrentInstance () {
+  return currentInstance
 }

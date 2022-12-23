@@ -1,4 +1,4 @@
-import {ShapeFlags} from './shapeFlags'
+import { ShapeFlags } from './shapeFlags'
 
 export function createVNode (type, props?, children?) {
   const vNode: any = {
@@ -23,3 +23,7 @@ export function createVNode (type, props?, children?) {
 }
 
 const getShapeFlag = (type) => typeof type === 'string' ? ShapeFlags.ELEMENT : ShapeFlags.STATEFUL_COMPONENT
+
+export function createTextVNode (text) {
+  return createVNode(Text, {}, text)
+}

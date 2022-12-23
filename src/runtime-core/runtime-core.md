@@ -250,7 +250,7 @@ const App = {
 }
 ```
 
-### 优化
+#### 优化
 > 因为不是所有的children都需要作为插槽处理，只有当虚拟节点满足 组件类型 和组件的children为 object 时才需要处理  
 > 所以在处理组件的children时为组件加上插槽类型的ShapeFlag  
 > 创建节点时判断
@@ -262,10 +262,33 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
   }
 ```
 
+### Fragment&Text节点类型
+> 在处理插槽的时候，renderSlots拿到是虚拟节点数组，render函数不能直接处理，所以需要使用div将其包裹。  
+> 于是renderSlots多渲染了一个div标签，使页面结构与代码不一致。  
+> 由此引出Fragment节点类型和Text节点类型  
+> Fragment -> 只渲染children  
+> Text -> 直接渲染文本，不是vNode
+
+#### 解析
+ - Fragment
+  > 在patch方法中，目前有区分 element 和 component 类型的节点，而现在需要再新增一个Fragment类型，
+  > Fragment类型只渲染vNode的children。  
+  > 在渲染插槽的时候，不再用 div 包裹，而是使用Fragment(Symbol) -> processFragment -> 直接mountChildren
+
+ - Text
+  > 比如 `header: ({ age }) => [h('p', {}, 'header' + age, '你好呀'])`要渲染两个节点，有一个节点是文本不是vNode  
+  > createTextVNode：返回一个特殊的vNode，type是Text  
+  > patch新增processText -> 创建文本节点并添加到容器上  
+  > 给vNode添加真实节点el属性
+
+### getCurrentInstance
+> 通过一个全局变量保存instance，在调用组件的setup方法时更新全局变量。  
+> 因此getCurrentInstance只能在setup中使用。
+
 ### provide&inject
 > 一个组件通过provide来向后代组件传递数据，后代组件可以通过inject获取到祖先组件传递的数据。
- - provide - 存
- - inject - 取
+- provide - 存
+- inject - 取
 
 > 1.基本实现
 > 1-1.provide将组件传入的数据保存到当前组件的provides中  
@@ -274,7 +297,7 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
 
 > 2.跨层级访问  
 > 当最后一层组件访问时，中间组件的provides中可能没有数据，于是让这中间组件的provides指向父组件的provides
-> （组件的parent可能为空）  
+> （组件的parent可能为空）
 
 > 3.当中间组件有自己的provides时，就会出现错误，设置中间组件的属性时，会把父组件的属性修改了  
 > 4.通过原型链实现，将当前组件的provides设置为一个新对象，这个新对象的原型对象是父组件的provides  

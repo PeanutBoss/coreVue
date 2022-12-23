@@ -1,5 +1,5 @@
 import { createComponentInstance, setupComponent } from "./component";
-import { ShapeFlags } from './shapeFlags'
+import {Fragment, ShapeFlags} from './shapeFlags'
 import {createVNode} from "./vNode";
 
 export function render (vNode, container) {
@@ -7,11 +7,21 @@ export function render (vNode, container) {
 }
 
 function patch (vNode, container) {
-  // TODO 判断是组件类型还是普通标签
-  if (vNode.shapeFlag & ShapeFlags.ELEMENT) {
-    processElement(vNode, container)
-  } else if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
-    processComponent(vNode, container)
+  const { type } = vNode
+  switch (type) {
+    case Fragment:
+      processFragment(vNode, container)
+      break
+    case Text:
+      processText(vNode, container)
+      break
+    default:
+      if (vNode.shapeFlag & ShapeFlags.ELEMENT) {
+        processElement(vNode, container)
+      } else if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+        processComponent(vNode, container)
+      }
+      break
   }
 }
 
@@ -85,10 +95,23 @@ function processProps (vNode, container) {
   }
 }
 
+function processFragment (vNode, container) {
+  mountChildren(vNode, container)
+}
+
+function processText (vNode, container) {
+  const { children } = vNode
+  vNode.el = document.createTextNode(children)
+  container.append(vNode.el)
+}
+
 export function renderSlots (slots, name, props = {}) {
   // 1/2 实现
   // return createVNode('div', {}, slots)
   // 3.具名插槽
   const slot = slots[name]
-  if (slot) return createVNode('div', {}, slot(props))
+  // if (slot) return createVNode('div', {}, slot(props))
+
+  // 如果使用div包裹会导致渲染出来的页面与代码结构不一致
+  if (slot) return createVNode(Fragment, {}, slot(props))
 }
