@@ -261,3 +261,25 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     }
   }
 ```
+
+### provide&inject
+> 一个组件通过provide来向后代组件传递数据，后代组件可以通过inject获取到祖先组件传递的数据。
+ - provide - 存
+ - inject - 取
+
+> 1.基本实现
+> 1-1.provide将组件传入的数据保存到当前组件的provides中  
+> 1-2.inject取的时候从当前组件的父组件（parent）中取  
+> 1-3.处理组件的parent
+
+> 2.跨层级访问  
+> 当最后一层组件访问时，中间组件的provides中可能没有数据，于是让这中间组件的provides指向父组件的provides
+> （组件的parent可能为空）  
+
+> 3.当中间组件有自己的provides时，就会出现错误，设置中间组件的属性时，会把父组件的属性修改了  
+> 4.通过原型链实现，将当前组件的provides设置为一个新对象，这个新对象的原型对象是父组件的provides  
+> 5-1.因为上一步的操作是一个初始化的操作，当一个组件调用两次provide时，就会覆盖掉上一次的provides，
+> 所以这一步只能在初始化的时候执行  
+> 5-2.当当前组件的provides等于父组件的provides，说明需要初始化  
+> 6-1.inject的默认值，如果key在provides中则返回，否则返回默认值  
+> 6-2.也可以传入函数，判断如果是函数则执行并返回结果
