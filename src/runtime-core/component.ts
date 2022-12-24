@@ -2,15 +2,18 @@ import { PublicInstanceHandlers } from './componentPublicInstance'
 import {shallowReadonly} from "../reactivity/reactive";
 import { emit } from "./emit";
 import {ShapeFlags} from "./shapeFlags";
-export function createComponentInstance (vNode) {
+export function createComponentInstance (vNode, parent) {
   const component: any = {
     vNode,
     type: vNode.type,
     setupState: {},
     slots: {},
     props: {},
+    parent,
+    provides: {},
     emit: null
   }
+  // console.log(component, 'instance')
   component.emit = emit.bind(null, component)
   return component
 }

@@ -2,35 +2,35 @@ import { createComponentInstance, setupComponent } from "./component";
 import {Fragment, ShapeFlags} from './shapeFlags'
 import {createVNode} from "./vNode";
 
-export function render (vNode, container) {
-  patch(vNode, container)
+export function render (vNode, container, parentComponent) {
+  patch(vNode, container, parentComponent)
 }
 
-function patch (vNode, container) {
+function patch (vNode, container, parentComponent) {
   const { type } = vNode
   switch (type) {
     case Fragment:
-      processFragment(vNode, container)
+      processFragment(vNode, container, parentComponent)
       break
     case Text:
       processText(vNode, container)
       break
     default:
       if (vNode.shapeFlag & ShapeFlags.ELEMENT) {
-        processElement(vNode, container)
+        processElement(vNode, container, parentComponent)
       } else if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
-        processComponent(vNode, container)
+        processComponent(vNode, container, parentComponent)
       }
       break
   }
 }
 
-function processComponent (vNode, container) {
-  mountComponent(vNode, container)
+function processComponent (vNode, container, parentComponent) {
+  mountComponent(vNode, container, parentComponent)
 }
 
-function mountComponent(vNode, container) {
-  const instance = createComponentInstance(vNode)
+function mountComponent(vNode, container, parentComponent) {
+  const instance = createComponentInstance(vNode, parentComponent)
 
   setupComponent(instance)
 
@@ -43,16 +43,16 @@ function setupRenderEffect(instance, vNode, container) {
   // 基于虚拟节点，进一步调用patch
   // vNode -> element -> mountElement
 
-  patch(subTree, container)
+  patch(subTree, container, instance)
 
   vNode.el = subTree.el
 }
 
-function processElement (vNode, container) {
-  mountElement(vNode, container)
+function processElement (vNode, container, parentComponent) {
+  mountElement(vNode, container, parentComponent)
 }
 
-function mountElement (vNode, container) {
+function mountElement (vNode, container, parentComponent) {
   // mountElement会做的一些事
   // const el = document.createElement('div')
   // el.setAttribute('class', 'content')
@@ -64,7 +64,7 @@ function mountElement (vNode, container) {
   // console.log(vNode, '将el添加到html标签对应的虚拟DOM上了')
   vNode.el = el
 
-  mountChildren(vNode, el)
+  mountChildren(vNode, el, parentComponent)
 
   processProps(vNode, el)
 
@@ -72,12 +72,12 @@ function mountElement (vNode, container) {
   container.append(el)
 }
 
-function mountChildren (vNode, container) {
+function mountChildren (vNode, container, parentComponent) {
   // 处理内容
   if (vNode.shapeFlag & ShapeFlags.TEXT_CHILDREN) {
     container.textContent = vNode.children
   } else if (vNode.shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
-    vNode.children.forEach(child => patch(child, container))
+    vNode.children.forEach(child => patch(child, container, parentComponent))
   }
 }
 
@@ -95,8 +95,8 @@ function processProps (vNode, container) {
   }
 }
 
-function processFragment (vNode, container) {
-  mountChildren(vNode, container)
+function processFragment (vNode, container, parentComponent) {
+  mountChildren(vNode, container, parentComponent)
 }
 
 function processText (vNode, container) {
