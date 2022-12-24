@@ -7,16 +7,22 @@ const Provider = {
     provide('bar', 'barVal')
   },
   render () {
-    return h('div', {}, [h('p', {}, 'provider'), h(Consumer)])
-    // return h('div', {}, [h('p', {}, 'provider'), h(ProviderTwo)])
+    // return h('div', {}, [h('p', {}, 'provider'), h(Consumer)])
+    return h('div', {}, [h('p', {}, 'provider'), h(ProviderTwo)])
   }
 }
 
 const ProviderTwo = {
   name: "Provider",
-  setup () {},
+  setup () {
+    provide('foo', 'fooValTwo')
+    const foo = inject('foo')
+    return {
+      foo
+    }
+  },
   render () {
-    return h('div', {}, [h('p', {}, 'providerTwo'), h(Consumer)])
+    return h('div', {}, [h('p', {}, `providerTwo - ${this.foo}`), h(Consumer)])
   }
 }
 

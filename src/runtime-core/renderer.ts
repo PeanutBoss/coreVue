@@ -2,8 +2,8 @@ import { createComponentInstance, setupComponent } from "./component";
 import {Fragment, ShapeFlags} from './shapeFlags'
 import {createVNode} from "./vNode";
 
-export function render (vNode, container, parentComponent) {
-  patch(vNode, container, parentComponent)
+export function render (vNode, container) {
+  patch(vNode, container, null)
 }
 
 function patch (vNode, container, parentComponent) {

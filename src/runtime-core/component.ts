@@ -10,7 +10,7 @@ export function createComponentInstance (vNode, parent) {
     slots: {},
     props: {},
     parent,
-    provides: {},
+    provides: parent ? parent.provides : {},
     emit: null
   }
   // console.log(component, 'instance')
