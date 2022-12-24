@@ -15,8 +15,15 @@ export function provide (key, value) {
     }
 }
 
-export function inject (key) {
+export function inject (key, defaultValue) {
     const instance: any = getCurrentInstance()
     const parentProvides = instance.parent.provides
-    return parentProvides && parentProvides[key]
+    // return parentProvides && parentProvides[key]
+    if (!(key in parentProvides)) {
+        if (typeof defaultValue === 'function') {
+            return defaultValue()
+        }
+        return defaultValue
+    }
+    return parentProvides[key]
 }

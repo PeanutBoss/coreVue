@@ -17,12 +17,16 @@ const ProviderTwo = {
   setup () {
     provide('foo', 'fooValTwo')
     const foo = inject('foo')
+    const baz = inject('baz', 'bazVal')
+    const fV = inject('funVal', () => 'funVal')
     return {
-      foo
+      foo,
+      baz,
+      fV
     }
   },
   render () {
-    return h('div', {}, [h('p', {}, `providerTwo - ${this.foo}`), h(Consumer)])
+    return h('div', {}, [h('p', {}, `providerTwo - ${this.foo} - ${this.baz} - ${this.fV}`), h(Consumer)])
   }
 }
 
