@@ -306,3 +306,24 @@ if (vNode.shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
 > 5-2.当当前组件的provides等于父组件的provides，说明需要初始化  
 > 6-1.inject的默认值，如果key在provides中则返回，否则返回默认值  
 > 6-2.也可以传入函数，判断如果是函数则执行并返回结果
+
+### 实现自定义渲染器
+> 将运行时里面的具体实现抽离出来，使其不依赖平台。利用vue渲染机制在其他平台上渲染视图，就不能使用`document.createElement`，
+> 需要根据具体平台的API来渲染。  
+> 让渲染器接收一个配置对象，这个配置对象中包含各种具体的渲染操作。比如创建元素，在配置对象中传入createElement，createElement
+> 的实现根据当前平台来决定。
+
+#### renderer.ts
+导出一个方法用来创建渲染器，接收一个配置对象
+ - createElement
+ - patchProp
+ - insert
+
+在runtime-dom中创建需要渲染器需要的接口，实现基于DOM的渲染器。
+
+创建createAppAPI，接收render函数，内部返回之前的createApp方法  
+createRenderer返回一个对象，包含createApp方法（调用createAppAPI，以render作为参数）  
+
+runtime-dom返回createApp方法，根据已经实现的基于DOM的渲染器，调用它的createApp方法
+
+导出runtime-dom中的内容，在runtime-dom中导出runtime-core
