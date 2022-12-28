@@ -327,3 +327,10 @@ createRenderer返回一个对象，包含createApp方法（调用createAppAPI，
 runtime-dom返回createApp方法，根据已经实现的基于DOM的渲染器，调用它的createApp方法
 
 导出runtime-dom中的内容，在runtime-dom中导出runtime-core
+
+### watchEffect
+
+#### 功能描述
+- 1.接收一个函数，当函数中的响应式对象发生变化，会在组件渲染之前进行调用
+- 2.返回stopHandler，当调用stopHandler会把之前收集到的所有依赖清空掉
+- 3.onCleanUp，接收一个函数，会在下一次执行watchEffect之前调用这个函数
