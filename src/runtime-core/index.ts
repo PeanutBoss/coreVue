@@ -1,8 +1,0 @@
-// export { createApp } from './createApp'
-export { h } from './h'
-export { renderSlots } from './helpers/renderSlots'
-export { createTextVNode } from './vNode'
-export { getCurrentInstance } from './component'
-export { inject, provider } from './apiInject'
-export { createRender } from './renderer'
-export { nextTick } from './scheduler'
